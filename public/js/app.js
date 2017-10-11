@@ -877,8 +877,6 @@ module.exports = __webpack_require__(43);
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -906,8 +904,6 @@ var app = new Vue({
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 
 
 window._ = __webpack_require__(12);
@@ -42038,14 +42034,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 38 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -42063,11 +42055,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
     }
-};
+});
 
 /***/ }),
 /* 39 */
@@ -42160,14 +42152,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 41 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -42291,7 +42279,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             task: {
@@ -42326,6 +42314,11 @@ exports.default = {
                 $("#add_task_model").modal("hide");
             }).catch(function (error) {
                 _this.errors = [];
+
+                if (error.response.data) {
+                    _this.errors.push(error.response.data);
+                    return;
+                }
 
                 if (error.response.data.errors.name) {
                     _this.errors.push(error.response.data.errors.name[0]);
@@ -42386,7 +42379,7 @@ exports.default = {
             }
         }
     }
-};
+});
 
 /***/ }),
 /* 42 */
