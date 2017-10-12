@@ -37,7 +37,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-10 col-md-offset-0">
+            <div class="col-md-8 col-md-offset-0">
                 <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
@@ -52,7 +52,38 @@
                 <div class="row">
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
+                            <div class="panel-body">
+                                <el-button type="primary">Hello</el-button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Product</div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Product</div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-md-offset-0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Product</div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-md-offset-0">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -60,7 +91,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -68,7 +99,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -76,7 +107,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -86,7 +117,7 @@
                 <div class="row">
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -94,7 +125,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -102,7 +133,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -110,41 +141,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
-
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-3 col-md-offset-0">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
-
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-offset-0">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
-
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-offset-0">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
-
-                            <div class="panel-body">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-md-offset-0">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -154,7 +151,7 @@
                 <div class="row">
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -162,7 +159,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -170,7 +167,7 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
@@ -178,11 +175,28 @@
                     </div>
                     <div class="col-md-3 col-md-offset-0">
                         <div class="panel panel-default">
-                            <div class="panel-heading">Login</div>
+                            <div class="panel-heading">Product</div>
 
                             <div class="panel-body">
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ad</div>
+                    <div class="panel-body">
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ad</div>
+                    <div class="panel-body">
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Ad</div>
+                    <div class="panel-body">
                     </div>
                 </div>
             </div>
