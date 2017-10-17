@@ -122,7 +122,7 @@
 
 <script>
     export default {
-        data(){
+        data() {
             return {
                 task: {
                     name: '',
@@ -133,17 +133,14 @@
                 update_task: {}
             }
         },
-        mounted()
-        {
+        mounted() {
             this.readTasks();
         },
         methods: {
-            initAddTask()
-            {
+            initAddTask() {
                 $("#add_task_model").modal("show");
             },
-            createTask()
-            {
+            createTask() {
                 axios.post('/task', {
                     name: this.task.name,
                     description: this.task.description,
@@ -169,13 +166,11 @@
                         }
                     });
             },
-            reset()
-            {
+            reset() {
                 this.task.name = '';
                 this.task.description = '';
             },
-            readTasks()
-            {
+            readTasks() {
                 axios.get('/task')
                     .then(response => {
 
@@ -183,14 +178,12 @@
 
                     });
             },
-            initUpdate(index)
-            {
+            initUpdate(index) {
                 this.errors = [];
                 $("#update_task_model").modal("show");
                 this.update_task = this.tasks[index];
             },
-            updateTask()
-            {
+            updateTask() {
                 axios.patch('/task/' + this.update_task.id, {
                     name: this.update_task.name,
                     description: this.update_task.description,
@@ -211,8 +204,7 @@
                         }
                     });
             },
-            deleteTask(index)
-            {
+            deleteTask(index) {
                 let conf = confirm("Do you ready want to delete this task?");
                 if (conf === true) {
 

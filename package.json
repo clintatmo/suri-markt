@@ -24,6 +24,7 @@
         "vue-loader": "^13.3.0"
     },
     "dependencies": {
-        "element-ui": "^1.4.6"
+        "element-ui": "^1.4.6",
+        "moment": "^2.19.1"
     }
 }
