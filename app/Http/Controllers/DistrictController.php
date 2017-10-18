@@ -20,7 +20,10 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        //
+        $districts = District::all();
+        return response()->json([
+            'districts'    => $districts,
+        ], 200);
     }
 
     /**
@@ -41,7 +44,18 @@ class DistrictController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $district = District::create([
+            'name'        => request('name')
+        ]);
+
+        return response()->json([
+            'district'    => $district,
+            'message' => 'Success'
+        ], 200);
     }
 
     /**
@@ -75,7 +89,16 @@ class DistrictController extends Controller
      */
     public function update(Request $request, District $district)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $district->name = request('name');
+        $district->save();
+
+        return response()->json([
+            'message' => 'District updated successfully!'
+        ], 200);
     }
 
     /**

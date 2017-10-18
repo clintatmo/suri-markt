@@ -21,9 +21,6 @@
                                     Name
                                 </th>
                                 <th>
-                                    Description
-                                </th>
-                                <th>
                                     Action
                                 </th>
                             </tr>
@@ -31,9 +28,6 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>
                                     {{ district.name }}
-                                </td>
-                                <td>
-                                    {{ district.description }}
                                 </td>
                                 <td>
                                     <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
@@ -68,11 +62,6 @@
                             <input type="text" name="name" id="name" placeholder="District Name" class="form-control"
                                    v-model="district.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="District Description" v-model="district.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -103,11 +92,6 @@
                             <input type="text" placeholder="District Name" class="form-control"
                                    v-model="update_district.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea cols="30" rows="5" class="form-control"
-                                      placeholder="District Description" v-model="update_district.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -125,8 +109,7 @@
         data() {
             return {
                 district: {
-                    name: '',
-                    description: ''
+                    name: ''
                 },
                 errors: [],
                 districts: [],
@@ -142,8 +125,7 @@
             },
             createDistrict() {
                 axios.post('/district', {
-                    name: this.district.name,
-                    description: this.district.description,
+                    name: this.district.name
                 })
                     .then(response => {
 
@@ -168,7 +150,6 @@
             },
             reset() {
                 this.district.name = '';
-                this.district.description = '';
             },
             readDistricts() {
                 axios.get('/district')
@@ -185,8 +166,7 @@
             },
             updateDistrict() {
                 axios.patch('/district/' + this.update_district.id, {
-                    name: this.update_district.name,
-                    description: this.update_district.description,
+                    name: this.update_district.name
                 })
                     .then(response => {
 
@@ -197,10 +177,6 @@
                         this.errors = [];
                         if (error.response.data.errors.name) {
                             this.errors.push(error.response.data.errors.name[0]);
-                        }
-
-                        if (error.response.data.errors.description) {
-                            this.errors.push(error.response.data.errors.description[0]);
                         }
                     });
             },

@@ -98837,37 +98837,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             category: {
-                name: '',
-                description: ''
+                name: ''
             },
             errors: [],
-            categorys: [],
+            categories: [],
             update_category: {}
         };
     },
     mounted: function mounted() {
-        this.readCategorys();
+        this.readCategories();
     },
 
     methods: {
@@ -98878,13 +98861,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/category', {
-                name: this.category.name,
-                description: this.category.description
+                name: this.category.name
             }).then(function (response) {
 
                 _this.reset();
 
-                _this.categorys.push(response.data.category);
+                _this.categories.push(response.data.category);
 
                 $("#add_category_model").modal("hide");
             }).catch(function (error) {
@@ -98901,27 +98883,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset: function reset() {
             this.category.name = '';
-            this.category.description = '';
         },
-        readCategorys: function readCategorys() {
+        readCategories: function readCategories() {
             var _this2 = this;
 
             axios.get('/category').then(function (response) {
 
-                _this2.categorys = response.data.categorys;
+                _this2.categories = response.data.categories;
             });
         },
         initUpdate: function initUpdate(index) {
             this.errors = [];
             $("#update_category_model").modal("show");
-            this.update_category = this.categorys[index];
+            this.update_category = this.categories[index];
         },
         updateCategory: function updateCategory() {
             var _this3 = this;
 
             axios.patch('/category/' + this.update_category.id, {
-                name: this.update_category.name,
-                description: this.update_category.description
+                name: this.update_category.name
             }).then(function (response) {
 
                 $("#update_category_model").modal("hide");
@@ -98929,10 +98909,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
                     _this3.errors.push(error.response.data.errors.name[0]);
-                }
-
-                if (error.response.data.errors.description) {
-                    _this3.errors.push(error.response.data.errors.description[0]);
                 }
             });
         },
@@ -98942,9 +98918,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var conf = confirm("Do you ready want to delete this category?");
             if (conf === true) {
 
-                axios.delete('/category/' + this.categorys[index].id).then(function (response) {
+                axios.delete('/category/' + this.categories[index].id).then(function (response) {
 
-                    _this4.categorys.splice(index, 1);
+                    _this4.categories.splice(index, 1);
                 }).catch(function (error) {});
             }
         }
@@ -98980,11 +98956,11 @@ var render = function() {
                 )
               ]
             ),
-            _vm._v("\n                    My Categorys\n                ")
+            _vm._v("\n                    My Categories\n                ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _vm.categorys.length > 0
+            _vm.categories.length > 0
               ? _c(
                   "table",
                   {
@@ -98997,7 +98973,7 @@ var render = function() {
                       [
                         _vm._m(0),
                         _vm._v(" "),
-                        _vm._l(_vm.categorys, function(category, index) {
+                        _vm._l(_vm.categories, function(category, index) {
                           return _c("tr", [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
@@ -99005,14 +98981,6 @@ var render = function() {
                               _vm._v(
                                 "\n                                " +
                                   _vm._s(category.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(category.description) +
                                   "\n                            "
                               )
                             ]),
@@ -99112,40 +99080,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category.description,
-                        expression: "category.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "description",
-                      id: "description",
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Category Description"
-                    },
-                    domProps: { value: _vm.category.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.category.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -99225,38 +99159,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_category.description,
-                        expression: "update_category.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Category Description"
-                    },
-                    domProps: { value: _vm.update_category.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_category.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -99302,12 +99204,6 @@ var staticRenderFns = [
       _c("th", [
         _vm._v(
           "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Description\n                            "
         )
       ]),
       _vm._v(" "),
@@ -99530,29 +99426,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             condition: {
-                name: '',
-                description: ''
+                name: ''
             },
             errors: [],
             conditions: [],
@@ -99571,8 +99450,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/condition', {
-                name: this.condition.name,
-                description: this.condition.description
+                name: this.condition.name
             }).then(function (response) {
 
                 _this.reset();
@@ -99594,7 +99472,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset: function reset() {
             this.condition.name = '';
-            this.condition.description = '';
         },
         readConditions: function readConditions() {
             var _this2 = this;
@@ -99613,8 +99490,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             axios.patch('/condition/' + this.update_condition.id, {
-                name: this.update_condition.name,
-                description: this.update_condition.description
+                name: this.update_condition.name
             }).then(function (response) {
 
                 $("#update_condition_model").modal("hide");
@@ -99622,10 +99498,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
                     _this3.errors.push(error.response.data.errors.name[0]);
-                }
-
-                if (error.response.data.errors.description) {
-                    _this3.errors.push(error.response.data.errors.description[0]);
                 }
             });
         },
@@ -99698,14 +99570,6 @@ var render = function() {
                               _vm._v(
                                 "\n                                " +
                                   _vm._s(condition.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(condition.description) +
                                   "\n                            "
                               )
                             ]),
@@ -99805,40 +99669,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.condition.description,
-                        expression: "condition.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "description",
-                      id: "description",
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Condition Description"
-                    },
-                    domProps: { value: _vm.condition.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.condition.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -99918,38 +99748,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_condition.description,
-                        expression: "update_condition.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Condition Description"
-                    },
-                    domProps: { value: _vm.update_condition.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_condition.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -99995,12 +99793,6 @@ var staticRenderFns = [
       _c("th", [
         _vm._v(
           "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Description\n                            "
         )
       ]),
       _vm._v(" "),
@@ -100223,37 +100015,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             currency: {
-                name: '',
-                description: ''
+                name: ''
             },
             errors: [],
-            currencys: [],
+            currencies: [],
             update_currency: {}
         };
     },
     mounted: function mounted() {
-        this.readCurrencys();
+        this.readCurrencies();
     },
 
     methods: {
@@ -100264,13 +100039,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/currency', {
-                name: this.currency.name,
-                description: this.currency.description
+                name: this.currency.name
             }).then(function (response) {
 
                 _this.reset();
 
-                _this.currencys.push(response.data.currency);
+                _this.currencies.push(response.data.currency);
 
                 $("#add_currency_model").modal("hide");
             }).catch(function (error) {
@@ -100287,27 +100061,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset: function reset() {
             this.currency.name = '';
-            this.currency.description = '';
         },
-        readCurrencys: function readCurrencys() {
+        readCurrencies: function readCurrencies() {
             var _this2 = this;
 
             axios.get('/currency').then(function (response) {
 
-                _this2.currencys = response.data.currencys;
+                _this2.currencies = response.data.currencies;
             });
         },
         initUpdate: function initUpdate(index) {
             this.errors = [];
             $("#update_currency_model").modal("show");
-            this.update_currency = this.currencys[index];
+            this.update_currency = this.currencies[index];
         },
         updateCurrency: function updateCurrency() {
             var _this3 = this;
 
             axios.patch('/currency/' + this.update_currency.id, {
-                name: this.update_currency.name,
-                description: this.update_currency.description
+                name: this.update_currency.name
             }).then(function (response) {
 
                 $("#update_currency_model").modal("hide");
@@ -100315,10 +100087,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
                     _this3.errors.push(error.response.data.errors.name[0]);
-                }
-
-                if (error.response.data.errors.description) {
-                    _this3.errors.push(error.response.data.errors.description[0]);
                 }
             });
         },
@@ -100328,9 +100096,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var conf = confirm("Do you ready want to delete this currency?");
             if (conf === true) {
 
-                axios.delete('/currency/' + this.currencys[index].id).then(function (response) {
+                axios.delete('/currency/' + this.currencies[index].id).then(function (response) {
 
-                    _this4.currencys.splice(index, 1);
+                    _this4.currencies.splice(index, 1);
                 }).catch(function (error) {});
             }
         }
@@ -100366,11 +100134,11 @@ var render = function() {
                 )
               ]
             ),
-            _vm._v("\n                    My Currencys\n                ")
+            _vm._v("\n                    My Currencies\n                ")
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "panel-body" }, [
-            _vm.currencys.length > 0
+            _vm.currencies.length > 0
               ? _c(
                   "table",
                   {
@@ -100383,7 +100151,7 @@ var render = function() {
                       [
                         _vm._m(0),
                         _vm._v(" "),
-                        _vm._l(_vm.currencys, function(currency, index) {
+                        _vm._l(_vm.currencies, function(currency, index) {
                           return _c("tr", [
                             _c("td", [_vm._v(_vm._s(index + 1))]),
                             _vm._v(" "),
@@ -100391,14 +100159,6 @@ var render = function() {
                               _vm._v(
                                 "\n                                " +
                                   _vm._s(currency.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(currency.description) +
                                   "\n                            "
                               )
                             ]),
@@ -100498,40 +100258,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.currency.description,
-                        expression: "currency.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "description",
-                      id: "description",
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Currency Description"
-                    },
-                    domProps: { value: _vm.currency.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.currency.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -100611,38 +100337,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_currency.description,
-                        expression: "update_currency.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "Currency Description"
-                    },
-                    domProps: { value: _vm.update_currency.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_currency.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -100688,12 +100382,6 @@ var staticRenderFns = [
       _c("th", [
         _vm._v(
           "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Description\n                            "
         )
       ]),
       _vm._v(" "),
@@ -100916,29 +100604,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             district: {
-                name: '',
-                description: ''
+                name: ''
             },
             errors: [],
             districts: [],
@@ -100957,8 +100628,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             axios.post('/district', {
-                name: this.district.name,
-                description: this.district.description
+                name: this.district.name
             }).then(function (response) {
 
                 _this.reset();
@@ -100980,7 +100650,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset: function reset() {
             this.district.name = '';
-            this.district.description = '';
         },
         readDistricts: function readDistricts() {
             var _this2 = this;
@@ -100999,8 +100668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this3 = this;
 
             axios.patch('/district/' + this.update_district.id, {
-                name: this.update_district.name,
-                description: this.update_district.description
+                name: this.update_district.name
             }).then(function (response) {
 
                 $("#update_district_model").modal("hide");
@@ -101008,10 +100676,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
                     _this3.errors.push(error.response.data.errors.name[0]);
-                }
-
-                if (error.response.data.errors.description) {
-                    _this3.errors.push(error.response.data.errors.description[0]);
                 }
             });
         },
@@ -101084,14 +100748,6 @@ var render = function() {
                               _vm._v(
                                 "\n                                " +
                                   _vm._s(district.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(district.description) +
                                   "\n                            "
                               )
                             ]),
@@ -101191,40 +100847,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.district.description,
-                        expression: "district.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      name: "description",
-                      id: "description",
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "District Description"
-                    },
-                    domProps: { value: _vm.district.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.district.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -101304,38 +100926,6 @@ var render = function() {
                       }
                     }
                   })
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Description:")
-                  ]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_district.description,
-                        expression: "update_district.description"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      cols: "30",
-                      rows: "5",
-                      placeholder: "District Description"
-                    },
-                    domProps: { value: _vm.update_district.description },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_district.description = $event.target.value
-                      }
-                    }
-                  })
                 ])
               ]),
               _vm._v(" "),
@@ -101381,12 +100971,6 @@ var staticRenderFns = [
       _c("th", [
         _vm._v(
           "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Description\n                            "
         )
       ]),
       _vm._v(" "),

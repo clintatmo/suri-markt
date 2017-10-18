@@ -21,9 +21,6 @@
                                     Name
                                 </th>
                                 <th>
-                                    Description
-                                </th>
-                                <th>
                                     Action
                                 </th>
                             </tr>
@@ -31,9 +28,6 @@
                                 <td>{{ index + 1 }}</td>
                                 <td>
                                     {{ condition.name }}
-                                </td>
-                                <td>
-                                    {{ condition.description }}
                                 </td>
                                 <td>
                                     <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
@@ -68,11 +62,6 @@
                             <input type="text" name="name" id="name" placeholder="Condition Name" class="form-control"
                                    v-model="condition.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="Condition Description" v-model="condition.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -103,11 +92,6 @@
                             <input type="text" placeholder="Condition Name" class="form-control"
                                    v-model="update_condition.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea cols="30" rows="5" class="form-control"
-                                      placeholder="Condition Description" v-model="update_condition.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -125,8 +109,7 @@
         data() {
             return {
                 condition: {
-                    name: '',
-                    description: ''
+                    name: ''
                 },
                 errors: [],
                 conditions: [],
@@ -142,8 +125,7 @@
             },
             createCondition() {
                 axios.post('/condition', {
-                    name: this.condition.name,
-                    description: this.condition.description,
+                    name: this.condition.name
                 })
                     .then(response => {
 
@@ -168,7 +150,6 @@
             },
             reset() {
                 this.condition.name = '';
-                this.condition.description = '';
             },
             readConditions() {
                 axios.get('/condition')
@@ -185,8 +166,7 @@
             },
             updateCondition() {
                 axios.patch('/condition/' + this.update_condition.id, {
-                    name: this.update_condition.name,
-                    description: this.update_condition.description,
+                    name: this.update_condition.name
                 })
                     .then(response => {
 
@@ -197,10 +177,6 @@
                         this.errors = [];
                         if (error.response.data.errors.name) {
                             this.errors.push(error.response.data.errors.name[0]);
-                        }
-
-                        if (error.response.data.errors.description) {
-                            this.errors.push(error.response.data.errors.description[0]);
                         }
                     });
             },

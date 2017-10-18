@@ -20,7 +20,10 @@ class ConditionController extends Controller
      */
     public function index()
     {
-        //
+        $conditions = Condition::all();
+        return response()->json([
+            'conditions'    => $conditions,
+        ], 200);
     }
 
     /**
@@ -41,7 +44,18 @@ class ConditionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $condition = Condition::create([
+            'name'        => request('name')
+        ]);
+
+        return response()->json([
+            'condition'    => $condition,
+            'message' => 'Success'
+        ], 200);
     }
 
     /**
@@ -75,7 +89,16 @@ class ConditionController extends Controller
      */
     public function update(Request $request, Condition $condition)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $condition->name = request('name');
+        $condition->save();
+
+        return response()->json([
+            'message' => 'Condition updated successfully!'
+        ], 200);
     }
 
     /**

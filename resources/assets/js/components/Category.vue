@@ -7,11 +7,11 @@
                         <button @click="initAddCategory()" class="btn btn-primary btn-xs pull-right">
                             + Add New Category
                         </button>
-                        My Categorys
+                        My Categories
                     </div>
 
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="categorys.length > 0">
+                        <table class="table table-bordered table-striped table-responsive" v-if="categories.length > 0">
                             <tbody>
                             <tr>
                                 <th>
@@ -21,19 +21,13 @@
                                     Name
                                 </th>
                                 <th>
-                                    Description
-                                </th>
-                                <th>
                                     Action
                                 </th>
                             </tr>
-                            <tr v-for="(category, index) in categorys">
+                            <tr v-for="(category, index) in categories">
                                 <td>{{ index + 1 }}</td>
                                 <td>
                                     {{ category.name }}
-                                </td>
-                                <td>
-                                    {{ category.description }}
                                 </td>
                                 <td>
                                     <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
@@ -68,11 +62,6 @@
                             <input type="text" name="name" id="name" placeholder="Category Name" class="form-control"
                                    v-model="category.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="Category Description" v-model="category.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -103,11 +92,6 @@
                             <input type="text" placeholder="Category Name" class="form-control"
                                    v-model="update_category.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea cols="30" rows="5" class="form-control"
-                                      placeholder="Category Description" v-model="update_category.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -125,16 +109,15 @@
         data() {
             return {
                 category: {
-                    name: '',
-                    description: ''
+                    name: ''
                 },
                 errors: [],
-                categorys: [],
+                categories: [],
                 update_category: {}
             }
         },
         mounted() {
-            this.readCategorys();
+            this.readCategories();
         },
         methods: {
             initAddCategory() {
@@ -142,14 +125,13 @@
             },
             createCategory() {
                 axios.post('/category', {
-                    name: this.category.name,
-                    description: this.category.description,
+                    name: this.category.name
                 })
                     .then(response => {
 
                         this.reset();
 
-                        this.categorys.push(response.data.category);
+                        this.categories.push(response.data.category);
 
                         $("#add_category_model").modal("hide");
 
@@ -168,25 +150,23 @@
             },
             reset() {
                 this.category.name = '';
-                this.category.description = '';
             },
-            readCategorys() {
+            readCategories() {
                 axios.get('/category')
                     .then(response => {
 
-                        this.categorys = response.data.categorys;
+                        this.categories = response.data.categories;
 
                     });
             },
             initUpdate(index) {
                 this.errors = [];
                 $("#update_category_model").modal("show");
-                this.update_category = this.categorys[index];
+                this.update_category = this.categories[index];
             },
             updateCategory() {
                 axios.patch('/category/' + this.update_category.id, {
-                    name: this.update_category.name,
-                    description: this.update_category.description,
+                    name: this.update_category.name
                 })
                     .then(response => {
 
@@ -198,20 +178,16 @@
                         if (error.response.data.errors.name) {
                             this.errors.push(error.response.data.errors.name[0]);
                         }
-
-                        if (error.response.data.errors.description) {
-                            this.errors.push(error.response.data.errors.description[0]);
-                        }
                     });
             },
             deleteCategory(index) {
                 let conf = confirm("Do you ready want to delete this category?");
                 if (conf === true) {
 
-                    axios.delete('/category/' + this.categorys[index].id)
+                    axios.delete('/category/' + this.categories[index].id)
                         .then(response => {
 
-                            this.categorys.splice(index, 1);
+                            this.categories.splice(index, 1);
 
                         })
                         .catch(error => {

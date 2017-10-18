@@ -7,11 +7,11 @@
                         <button @click="initAddCurrency()" class="btn btn-primary btn-xs pull-right">
                             + Add New Currency
                         </button>
-                        My Currencys
+                        My Currencies
                     </div>
 
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="currencys.length > 0">
+                        <table class="table table-bordered table-striped table-responsive" v-if="currencies.length > 0">
                             <tbody>
                             <tr>
                                 <th>
@@ -21,19 +21,13 @@
                                     Name
                                 </th>
                                 <th>
-                                    Description
-                                </th>
-                                <th>
                                     Action
                                 </th>
                             </tr>
-                            <tr v-for="(currency, index) in currencys">
+                            <tr v-for="(currency, index) in currencies">
                                 <td>{{ index + 1 }}</td>
                                 <td>
                                     {{ currency.name }}
-                                </td>
-                                <td>
-                                    {{ currency.description }}
                                 </td>
                                 <td>
                                     <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
@@ -68,11 +62,6 @@
                             <input type="text" name="name" id="name" placeholder="Currency Name" class="form-control"
                                    v-model="currency.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="Currency Description" v-model="currency.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -103,11 +92,6 @@
                             <input type="text" placeholder="Currency Name" class="form-control"
                                    v-model="update_currency.name">
                         </div>
-                        <div class="form-group">
-                            <label for="description">Description:</label>
-                            <textarea cols="30" rows="5" class="form-control"
-                                      placeholder="Currency Description" v-model="update_currency.description"></textarea>
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -125,16 +109,15 @@
         data() {
             return {
                 currency: {
-                    name: '',
-                    description: ''
+                    name: ''
                 },
                 errors: [],
-                currencys: [],
+                currencies: [],
                 update_currency: {}
             }
         },
         mounted() {
-            this.readCurrencys();
+            this.readCurrencies();
         },
         methods: {
             initAddCurrency() {
@@ -142,14 +125,13 @@
             },
             createCurrency() {
                 axios.post('/currency', {
-                    name: this.currency.name,
-                    description: this.currency.description,
+                    name: this.currency.name
                 })
                     .then(response => {
 
                         this.reset();
 
-                        this.currencys.push(response.data.currency);
+                        this.currencies.push(response.data.currency);
 
                         $("#add_currency_model").modal("hide");
 
@@ -168,25 +150,23 @@
             },
             reset() {
                 this.currency.name = '';
-                this.currency.description = '';
             },
-            readCurrencys() {
+            readCurrencies() {
                 axios.get('/currency')
                     .then(response => {
 
-                        this.currencys = response.data.currencys;
+                        this.currencies = response.data.currencies;
 
                     });
             },
             initUpdate(index) {
                 this.errors = [];
                 $("#update_currency_model").modal("show");
-                this.update_currency = this.currencys[index];
+                this.update_currency = this.currencies[index];
             },
             updateCurrency() {
                 axios.patch('/currency/' + this.update_currency.id, {
-                    name: this.update_currency.name,
-                    description: this.update_currency.description,
+                    name: this.update_currency.name
                 })
                     .then(response => {
 
@@ -198,20 +178,16 @@
                         if (error.response.data.errors.name) {
                             this.errors.push(error.response.data.errors.name[0]);
                         }
-
-                        if (error.response.data.errors.description) {
-                            this.errors.push(error.response.data.errors.description[0]);
-                        }
                     });
             },
             deleteCurrency(index) {
                 let conf = confirm("Do you ready want to delete this currency?");
                 if (conf === true) {
 
-                    axios.delete('/currency/' + this.currencys[index].id)
+                    axios.delete('/currency/' + this.currencies[index].id)
                         .then(response => {
 
-                            this.currencys.splice(index, 1);
+                            this.currencies.splice(index, 1);
 
                         })
                         .catch(error => {

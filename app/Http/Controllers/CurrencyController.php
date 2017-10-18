@@ -20,7 +20,10 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        //
+        $currencies = Currency::all();
+        return response()->json([
+            'currencies'    => $currencies,
+        ], 200);
     }
 
     /**
@@ -41,7 +44,18 @@ class CurrencyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $currency = Currency::create([
+            'name'        => request('name')
+        ]);
+
+        return response()->json([
+            'currency'    => $currency,
+            'message' => 'Success'
+        ], 200);
     }
 
     /**
@@ -75,7 +89,16 @@ class CurrencyController extends Controller
      */
     public function update(Request $request, Currency $currency)
     {
-        //
+        $this->validate($request, [
+            'name'        => 'required|max:255'
+        ]);
+
+        $currency->name = request('name');
+        $currency->save();
+
+        return response()->json([
+            'message' => 'Currency updated successfully!'
+        ], 200);
     }
 
     /**
