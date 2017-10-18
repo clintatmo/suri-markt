@@ -80,21 +80,7 @@
                     </div>
                 </form>
                 <br/>
-                <div class="row">
-                    <category></category>
-                </div>
-                <div class="row">
-                    <condition></condition>
-                </div>
-                <div class="row">
-                    <district></district>
-                </div>
-                <div class="row">
-                    <currency></currency>
-                </div>
-                <div class="row">
-                    <task></task>
-                </div>
+                @yield('subcontent')
             </div>
             <div class="col-md-2">
                 <div class="panel panel-default">
