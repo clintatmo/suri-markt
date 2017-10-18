@@ -9,7 +9,6 @@
                         </button>
                         My Categories
                     </div>
-
                     <div class="panel-body">
                         <table class="table table-bordered table-striped table-responsive" v-if="categories.length > 0">
                             <tbody>
