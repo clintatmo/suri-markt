@@ -98727,6 +98727,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 //
 //
 //
@@ -98742,10 +98744,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            currentDate: new Date()
+            currentDate: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format("YYYY")
         };
     },
     mounted: function mounted() {},
@@ -98769,11 +98772,7 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "text-center" }, [
         _c("p", [
-          _vm._v(
-            "Copyright © suri-markt.com " +
-              _vm._s(_vm._f("moment")(_vm.currentDate, "YYYY")) +
-              " "
-          )
+          _vm._v("Copyright © sre-markt.com " + _vm._s(_vm.currentDate) + " ")
         ])
       ]),
       _vm._v(" "),

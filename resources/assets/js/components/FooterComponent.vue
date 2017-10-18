@@ -5,7 +5,7 @@
             <br/>
             <hr>
             <div class="text-center">
-                <p>Copyright &copy; suri-markt.com {{currentDate | moment("YYYY")}} </p>
+                <p>Copyright &copy; sre-markt.com {{currentDate}} </p>
             </div>
             <br>
         </footer>
@@ -13,10 +13,11 @@
 </template>
 
 <script>
+    import moment from 'moment';
     export default {
         data() {
             return {
-                currentDate: new Date()
+                currentDate: moment().format("YYYY")
             }
         },
         mounted() {
