@@ -4,14 +4,14 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <button @click="initAddTask()" class="btn btn-primary btn-xs pull-right">
-                            + Add New Task
+                        <button @click="initAddCategory()" class="btn btn-primary btn-xs pull-right">
+                            + Add New Category
                         </button>
-                        My Tasks
+                        My Categorys
                     </div>
 
                     <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="tasks.length > 0">
+                        <table class="table table-bordered table-striped table-responsive" v-if="categorys.length > 0">
                             <tbody>
                             <tr>
                                 <th>
@@ -27,17 +27,17 @@
                                     Action
                                 </th>
                             </tr>
-                            <tr v-for="(task, index) in tasks">
+                            <tr v-for="(category, index) in categorys">
                                 <td>{{ index + 1 }}</td>
                                 <td>
-                                    {{ task.name }}
+                                    {{ category.name }}
                                 </td>
                                 <td>
-                                    {{ task.description }}
+                                    {{ category.description }}
                                 </td>
                                 <td>
                                     <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
-                                    <button @click="deleteTask(index)" class="btn btn-danger btn-xs">Delete</button>
+                                    <button @click="deleteCategory(index)" class="btn btn-danger btn-xs">Delete</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -47,13 +47,13 @@
             </div>
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="add_task_model">
+        <div class="modal fade" tabindex="-1" role="dialog" id="add_category_model">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Add New Task</h4>
+                        <h4 class="modal-title">Add New Category</h4>
                     </div>
                     <div class="modal-body">
 
@@ -65,30 +65,30 @@
 
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" placeholder="Task Name" class="form-control"
-                                   v-model="task.name">
+                            <input type="text" name="name" id="name" placeholder="Category Name" class="form-control"
+                                   v-model="category.name">
                         </div>
                         <div class="form-group">
                             <label for="description">Description:</label>
                             <textarea name="description" id="description" cols="30" rows="5" class="form-control"
-                                      placeholder="Task Description" v-model="task.description"></textarea>
+                                      placeholder="Category Description" v-model="category.description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="createTask" class="btn btn-primary">Submit</button>
+                        <button type="button" @click="createCategory" class="btn btn-primary">Submit</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="update_task_model">
+        <div class="modal fade" tabindex="-1" role="dialog" id="update_category_model">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                                 aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Update Task</h4>
+                        <h4 class="modal-title">Update Category</h4>
                     </div>
                     <div class="modal-body">
 
@@ -100,18 +100,18 @@
 
                         <div class="form-group">
                             <label>Name:</label>
-                            <input type="text" placeholder="Task Name" class="form-control"
-                                   v-model="update_task.name">
+                            <input type="text" placeholder="Category Name" class="form-control"
+                                   v-model="update_category.name">
                         </div>
                         <div class="form-group">
                             <label for="description">Description:</label>
                             <textarea cols="30" rows="5" class="form-control"
-                                      placeholder="Task Description" v-model="update_task.description"></textarea>
+                                      placeholder="Category Description" v-model="update_category.description"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="updateTask" class="btn btn-primary">Submit</button>
+                        <button type="button" @click="updateCategory" class="btn btn-primary">Submit</button>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
@@ -124,34 +124,34 @@
     export default {
         data() {
             return {
-                task: {
+                category: {
                     name: '',
                     description: ''
                 },
                 errors: [],
-                tasks: [],
-                update_task: {}
+                categorys: [],
+                update_category: {}
             }
         },
         mounted() {
-            this.readTasks();
+            this.readCategorys();
         },
         methods: {
-            initAddTask() {
-                $("#add_task_model").modal("show");
+            initAddCategory() {
+                $("#add_category_model").modal("show");
             },
-            createTask() {
-                axios.post('/task', {
-                    name: this.task.name,
-                    description: this.task.description,
+            createCategory() {
+                axios.post('/category', {
+                    name: this.category.name,
+                    description: this.category.description,
                 })
                     .then(response => {
 
                         this.reset();
 
-                        this.tasks.push(response.data.task);
+                        this.categorys.push(response.data.category);
 
-                        $("#add_task_model").modal("hide");
+                        $("#add_category_model").modal("hide");
 
                     })
                     .catch(error => {
@@ -167,30 +167,30 @@
                     });
             },
             reset() {
-                this.task.name = '';
-                this.task.description = '';
+                this.category.name = '';
+                this.category.description = '';
             },
-            readTasks() {
-                axios.get('/task')
+            readCategorys() {
+                axios.get('/category')
                     .then(response => {
 
-                        this.tasks = response.data.tasks;
+                        this.categorys = response.data.categorys;
 
                     });
             },
             initUpdate(index) {
                 this.errors = [];
-                $("#update_task_model").modal("show");
-                this.update_task = this.tasks[index];
+                $("#update_category_model").modal("show");
+                this.update_category = this.categorys[index];
             },
-            updateTask() {
-                axios.patch('/task/' + this.update_task.id, {
-                    name: this.update_task.name,
-                    description: this.update_task.description,
+            updateCategory() {
+                axios.patch('/category/' + this.update_category.id, {
+                    name: this.update_category.name,
+                    description: this.update_category.description,
                 })
                     .then(response => {
 
-                        $("#update_task_model").modal("hide");
+                        $("#update_category_model").modal("hide");
 
                     })
                     .catch(error => {
@@ -204,14 +204,14 @@
                         }
                     });
             },
-            deleteTask(index) {
-                let conf = confirm("Do you ready want to delete this task?");
+            deleteCategory(index) {
+                let conf = confirm("Do you ready want to delete this category?");
                 if (conf === true) {
 
-                    axios.delete('/task/' + this.tasks[index].id)
+                    axios.delete('/category/' + this.categorys[index].id)
                         .then(response => {
 
-                            this.tasks.splice(index, 1);
+                            this.categorys.splice(index, 1);
 
                         })
                         .catch(error => {

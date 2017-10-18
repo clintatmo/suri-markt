@@ -21,6 +21,10 @@ Vue.use(Moment);
 
 Vue.component('example', require('./components/Example.vue'));
 Vue.component('task', require('./components/Task.vue'));
+Vue.component('category', require('./components/Category.vue'));
+Vue.component('condition', require('./components/Condition.vue'));
+Vue.component('currency', require('./components/Currency.vue'));
+Vue.component('district', require('./components/District.vue'));
 Vue.component('footer-component', require('./components/FooterComponent.vue'));
 
 const app = new Vue({
