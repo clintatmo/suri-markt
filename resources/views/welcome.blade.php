@@ -6,7 +6,14 @@
             <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <img src="{{asset('images/banner-ad-1.png')}}">
+                        <el-carousel :interval="8000" arrow="always" height="250px">
+                            <el-carousel-item>
+                                <img src="{{asset('images/banner_ad_1.png')}}">
+                            </el-carousel-item>
+                            <el-carousel-item>
+                                <img src="{{asset('images/banner_ad_2.jpg')}}">
+                            </el-carousel-item>
+                        </el-carousel>
                     </div>
                 </div>
             </div>
