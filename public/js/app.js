@@ -98832,10 +98832,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -98934,93 +98930,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _c(
-              "button",
+  return _c("div", [
+    _c("div", { staticClass: "panel panel-default" }, [
+      _c("div", { staticClass: "panel-heading" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-xs pull-right",
+            on: {
+              click: function($event) {
+                _vm.initAddCategory()
+              }
+            }
+          },
+          [_vm._v("\n                + Add New Category\n            ")]
+        ),
+        _vm._v("\n            My Categories\n        ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel-body" }, [
+        _vm.categories.length > 0
+          ? _c(
+              "table",
               {
-                staticClass: "btn btn-primary btn-xs pull-right",
-                on: {
-                  click: function($event) {
-                    _vm.initAddCategory()
-                  }
-                }
+                staticClass:
+                  "table table-bordered table-striped table-responsive"
               },
               [
-                _vm._v(
-                  "\n                        + Add New Category\n                    "
+                _c(
+                  "tbody",
+                  [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _vm._l(_vm.categories, function(category, index) {
+                      return _c("tr", [
+                        _c("td", [_vm._v(_vm._s(index + 1))]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(category.name) +
+                              "\n                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("td", [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-xs",
+                              on: {
+                                click: function($event) {
+                                  _vm.initUpdate(index)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger btn-xs",
+                              on: {
+                                click: function($event) {
+                                  _vm.deleteCategory(index)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ])
+                      ])
+                    })
+                  ],
+                  2
                 )
               ]
-            ),
-            _vm._v("\n                    My Categories\n                ")
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm.categories.length > 0
-              ? _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-bordered table-striped table-responsive"
-                  },
-                  [
-                    _c(
-                      "tbody",
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._l(_vm.categories, function(category, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(index + 1))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(category.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.initUpdate(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.deleteCategory(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ])
-                        })
-                      ],
-                      2
-                    )
-                  ]
-                )
-              : _vm._e()
-          ])
-        ])
+            )
+          : _vm._e()
       ])
     ]),
     _vm._v(" "),
@@ -99194,22 +99182,14 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("tr", [
+      _c("th", [_vm._v("\n                        No.\n                    ")]),
+      _vm._v(" "),
       _c("th", [
-        _vm._v(
-          "\n                                No.\n                            "
-        )
+        _vm._v("\n                        Name\n                    ")
       ]),
       _vm._v(" "),
       _c("th", [
-        _vm._v(
-          "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Action\n                            "
-        )
+        _vm._v("\n                        Action\n                    ")
       ])
     ])
   },

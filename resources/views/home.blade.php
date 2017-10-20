@@ -5,9 +5,8 @@
         <div class="row">
             <div class="col-md-12 col-md-offset-0">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Banner</div>
                     <div class="panel-body">
-                        <img src="{{asset('assets/images/banner-ad-1.png')}}">
+                        <img src="{{asset('images/banner-ad-1.png')}}">
                     </div>
                 </div>
             </div>
@@ -32,7 +31,7 @@
                                     <a href="#"><i class="fa fa-fw fa-folder"></i> Mijn account </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder"></i> Category </a>
+                                    <a href="home/category"><i class="fa fa-fw fa-folder"></i> Category </a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-folder"></i> Districten </a>
@@ -84,18 +83,18 @@
             </div>
             <div class="col-md-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ad</div>
                     <div class="panel-body">
+                        <img src="{{asset('images/ad_small_1.png')}}" class="ad_small_1">
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ad</div>
                     <div class="panel-body">
+                        <img src="{{asset('images/ad_small_2.jpg')}}" class="ad_small_2">
                     </div>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading">Ad</div>
                     <div class="panel-body">
+                        <img src="{{asset('images/ad_small_3.jpg')}}" class="ad_small_3">
                     </div>
                 </div>
             </div>

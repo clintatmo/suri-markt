@@ -1,42 +1,38 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <button @click="initAddCategory()" class="btn btn-primary btn-xs pull-right">
-                            + Add New Category
-                        </button>
-                        My Categories
-                    </div>
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="categories.length > 0">
-                            <tbody>
-                            <tr>
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                            <tr v-for="(category, index) in categories">
-                                <td>{{ index + 1 }}</td>
-                                <td>
-                                    {{ category.name }}
-                                </td>
-                                <td>
-                                    <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
-                                    <button @click="deleteCategory(index)" class="btn btn-danger btn-xs">Delete</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button @click="initAddCategory()" class="btn btn-primary btn-xs pull-right">
+                    + Add New Category
+                </button>
+                My Categories
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered table-striped table-responsive" v-if="categories.length > 0">
+                    <tbody>
+                    <tr>
+                        <th>
+                            No.
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Action
+                        </th>
+                    </tr>
+                    <tr v-for="(category, index) in categories">
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                            {{ category.name }}
+                        </td>
+                        <td>
+                            <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
+                            <button @click="deleteCategory(index)" class="btn btn-danger btn-xs">Delete</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 

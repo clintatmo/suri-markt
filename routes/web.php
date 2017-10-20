@@ -20,7 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('/task', 'TaskController');
-Route::resource('/home/category', 'CategoryController');
+Route::resource('/home/category', 'CategoryController@index');
 Route::resource('/condition', 'ConditionController');
 Route::resource('/district', 'DistrictController');
 Route::resource('/currency', 'CurrencyController');
