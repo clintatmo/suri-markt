@@ -37,8 +37,8 @@
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-folder"></i> Mijn account </a>
                                 </li>
-                                <li>
-                                    <a href="home/category"><i class="fa fa-fw fa-folder"></i> Category </a>
+                                <li class="{{ Request::is('categories') ? 'active' : '' }}">
+                                    <a href="{{ route('categories') }}"><i class="fa fa-fw fa-folder"></i> Category </a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-folder"></i> Districten </a>

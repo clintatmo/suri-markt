@@ -21,9 +21,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return response()->view('category',
-            array('categories'    => $categories)
-            , 200);
+        return response()->json([
+            'categories'    => $categories,
+        ], 200);
     }
 
     /**
