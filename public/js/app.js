@@ -29981,18 +29981,22 @@ module.exports = __webpack_require__(248);
 
 /***/ }),
 /* 153 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui__ = __webpack_require__(154);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css__ = __webpack_require__(195);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 
 
+var _elementUi = __webpack_require__(154);
+
+var _elementUi2 = _interopRequireDefault(_elementUi);
+
+__webpack_require__(195);
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -30003,8 +30007,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(203);
 
 window.Vue = __webpack_require__(4);
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_element_ui___default.a);
-Vue.use(__WEBPACK_IMPORTED_MODULE_2_moment___default.a);
+Vue.use(_elementUi2.default);
+Vue.use(_moment2.default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -67011,6 +67015,8 @@ webpackContext.id = 202;
 /* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
 
 window._ = __webpack_require__(204);
 
@@ -97914,10 +97920,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 228 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -97935,11 +97945,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     mounted: function mounted() {
         console.log('Component mounted.');
     }
-});
+};
 
 /***/ }),
 /* 229 */
@@ -98034,10 +98044,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 231 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -98161,7 +98175,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     data: function data() {
         return {
             task: {
@@ -98256,7 +98270,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     }
-});
+};
 
 /***/ }),
 /* 232 */
@@ -98727,35 +98741,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 234 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -98833,7 +98826,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     data: function data() {
         return {
             category: {
@@ -98841,7 +98834,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             errors: [],
             categories: [],
-            update_category: {}
+            update_category: {},
+            dialogFormVisible: false,
+            dialogFormTitle: 'Add New Category',
+            confirmationDialogVisible: false,
+            rowToDelete: null,
+            create: true
         };
     },
     mounted: function mounted() {
@@ -98849,8 +98847,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
-        initAddCategory: function initAddCategory() {
-            $("#add_category_model").modal("show");
+        initCreate: function initCreate() {
+            this.dialogFormTitle = 'Add New Category';
+            this.dialogFormVisible = true;
+            this.create = true;
         },
         createCategory: function createCategory() {
             var _this = this;
@@ -98860,10 +98860,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).then(function (response) {
 
                 _this.reset();
-
-                _this.categories.push(response.data.category);
-
-                $("#add_category_model").modal("hide");
+                _this.readCategories();
+                _this.dialogFormVisible = false;
             }).catch(function (error) {
                 _this.errors = [];
 
@@ -98878,6 +98876,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset: function reset() {
             this.category.name = '';
+            this.errors = [];
         },
         readCategories: function readCategories() {
             var _this2 = this;
@@ -98887,19 +98886,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.categories = response.data.categories;
             });
         },
-        initUpdate: function initUpdate(index) {
+        initUpdate: function initUpdate(row) {
             this.errors = [];
-            $("#update_category_model").modal("show");
-            this.update_category = this.categories[index];
+            this.dialogFormTitle = 'Edit Category';
+            this.dialogFormVisible = true;
+            this.category = row;
+            this.create = false;
         },
         updateCategory: function updateCategory() {
             var _this3 = this;
 
-            axios.patch('/category/' + this.update_category.id, {
-                name: this.update_category.name
+            axios.patch('/category/' + this.category.id, {
+                name: this.category.name
             }).then(function (response) {
 
-                $("#update_category_model").modal("hide");
+                _this3.reset();
+                _this3.dialogFormVisible = false;
+                _this3.readCategories();
             }).catch(function (error) {
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
@@ -98907,20 +98910,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         },
-        deleteCategory: function deleteCategory(index) {
+        initDelete: function initDelete(row) {
+            this.rowToDelete = row.id;
+            this.confirmationDialogVisible = true;
+        },
+        deleteCategory: function deleteCategory(id) {
             var _this4 = this;
 
-            var conf = confirm("Do you ready want to delete this category?");
-            if (conf === true) {
+            axios.delete('/category/' + id).then(function (response) {
 
-                axios.delete('/category/' + this.categories[index].id).then(function (response) {
-
-                    _this4.categories.splice(index, 1);
-                }).catch(function (error) {});
-            }
+                _this4.confirmationDialogVisible = false;
+                _this4.readCategories();
+            }).catch(function (error) {});
         }
     }
-});
+};
 
 /***/ }),
 /* 235 */
@@ -98930,58 +98934,70 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "panel panel-default" }, [
-      _c("div", { staticClass: "panel-heading" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary btn-xs pull-right",
-            on: {
-              click: function($event) {
-                _vm.initAddCategory()
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-xs pull-right",
+              on: {
+                click: function($event) {
+                  _vm.initCreate()
+                }
               }
-            }
-          },
-          [_vm._v("\n                + Add New Category\n            ")]
-        ),
-        _vm._v("\n            My Categories\n        ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "panel-body" }, [
-        _vm.categories.length > 0
-          ? _c(
-              "table",
+            },
+            [_vm._v("\n                + Add New Category\n            ")]
+          ),
+          _vm._v("\n            My Categories\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "panel-body" },
+          [
+            _c(
+              "el-table",
               {
-                staticClass:
-                  "table table-bordered table-striped table-responsive"
+                staticStyle: { width: "100%" },
+                attrs: {
+                  data: _vm.categories,
+                  border: "",
+                  stripe: "",
+                  height: "400",
+                  "default-sort": { prop: "name", order: "ascending" }
+                }
               },
               [
-                _c(
-                  "tbody",
-                  [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _vm._l(_vm.categories, function(category, index) {
-                      return _c("tr", [
-                        _c("td", [_vm._v(_vm._s(index + 1))]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(category.name) +
-                              "\n                    "
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
+                _c("el-table-column", {
+                  attrs: { prop: "id", label: "#", width: "80", sortable: "" }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "name",
+                    label: "NAME",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: { fixed: "right", label: "Operations", width: "120" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
                           _c(
-                            "button",
+                            "el-button",
                             {
-                              staticClass: "btn btn-success btn-xs",
+                              attrs: { type: "text", size: "small" },
                               on: {
                                 click: function($event) {
-                                  _vm.initUpdate(index)
+                                  _vm.initUpdate(scope.row)
                                 }
                               }
                             },
@@ -98989,253 +99005,218 @@ var render = function() {
                           ),
                           _vm._v(" "),
                           _c(
-                            "button",
+                            "el-button",
                             {
-                              staticClass: "btn btn-danger btn-xs",
+                              attrs: { type: "text", size: "small" },
                               on: {
                                 click: function($event) {
-                                  _vm.deleteCategory(index)
+                                  _vm.initDelete(scope.row)
                                 }
                               }
                             },
                             [_vm._v("Delete")]
                           )
-                        ])
-                      ])
-                    })
-                  ],
-                  2
-                )
-              ]
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
             )
-          : _vm._e()
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "add_category_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.category.name,
-                        expression: "category.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      id: "name",
-                      placeholder: "Category Name"
-                    },
-                    domProps: { value: _vm.category.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.category.name = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.createCategory }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
+          ],
+          1
         )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "update_category_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_category.name,
-                        expression: "update_category.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Category Name" },
-                    domProps: { value: _vm.update_category.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_category.name = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.updateCategory }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [_vm._v("\n                        No.\n                    ")]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v("\n                        Name\n                    ")
       ]),
       _vm._v(" "),
-      _c("th", [
-        _vm._v("\n                        Action\n                    ")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "button",
+        "el-dialog",
         {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
+          attrs: { title: _vm.dialogFormTitle },
+          on: {
+            close: function($event) {
+              _vm.reset(), _vm.readCategories()
+            }
+          },
+          model: {
+            value: _vm.dialogFormVisible,
+            callback: function($$v) {
+              _vm.dialogFormVisible = $$v
+            },
+            expression: "dialogFormVisible"
           }
         },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+        [
+          _c(
+            "span",
+            {
+              staticClass: "dialog-header",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("i", { staticClass: "glyphicon glyphicon-plus" }),
+              _vm._v(" New\n    ")
+            ]
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _vm.errors.length > 0
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("li", [_vm._v(_vm._s(error))])
+                  })
+                )
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "el-form",
+            {
+              ref: "category",
+              attrs: {
+                "label-position": "right",
+                model: _vm.category,
+                "label-width": "120px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "Name", prop: "name" } },
+                [
+                  _c("el-input", {
+                    model: {
+                      value: _vm.category.name,
+                      callback: function($$v) {
+                        _vm.category.name = $$v
+                      },
+                      expression: "category.name"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "default", icon: "circle-cross" },
+                  on: {
+                    click: function($event) {
+                      ;(_vm.dialogFormVisible = false), _vm.reset()
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
+              _vm._v(" "),
+              _vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.createCategory }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.updateCategory }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
       ),
       _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add New Category")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
       _c(
-        "button",
+        "el-dialog",
         {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
+          attrs: { title: "Warning!", size: "tiny" },
+          on: {
+            close: function($event) {
+              _vm.readCategories()
+            }
+          },
+          model: {
+            value: _vm.confirmationDialogVisible,
+            callback: function($$v) {
+              _vm.confirmationDialogVisible = $$v
+            },
+            expression: "confirmationDialogVisible"
           }
         },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update Category")])
-    ])
-  }
-]
+        [
+          _c("span", [_vm._v("Please confirm this action.")]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.confirmationDialogVisible = false
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteCategory(_vm.rowToDelete)
+                    }
+                  }
+                },
+                [_vm._v("Confirm")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -99295,10 +99276,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 237 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -99406,7 +99391,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     data: function data() {
         return {
             condition: {
@@ -99493,7 +99478,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     }
-});
+};
 
 /***/ }),
 /* 238 */
@@ -99884,10 +99869,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 240 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -99995,7 +99984,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     data: function data() {
         return {
             currency: {
@@ -100082,7 +100071,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     }
-});
+};
 
 /***/ }),
 /* 241 */
@@ -100473,10 +100462,14 @@ module.exports = Component.exports
 
 /***/ }),
 /* 243 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 //
 //
 //
@@ -100584,7 +100577,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+exports.default = {
     data: function data() {
         return {
             district: {
@@ -100671,7 +100664,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     }
-});
+};
 
 /***/ }),
 /* 244 */
@@ -101062,38 +101055,44 @@ module.exports = Component.exports
 
 /***/ }),
 /* 246 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
-/* harmony default export */ __webpack_exports__["default"] = ({
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _moment = __webpack_require__(0);
+
+var _moment2 = _interopRequireDefault(_moment);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = {
     data: function data() {
         return {
-            currentDate: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format("YYYY")
+            currentDate: (0, _moment2.default)().format("YYYY")
         };
     },
     mounted: function mounted() {},
 
     methods: {}
-});
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 247 */
