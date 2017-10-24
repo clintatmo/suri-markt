@@ -77,7 +77,6 @@
                 </div>
             </div>
             <div class="col-md-8 col-md-offset-0">
-                <br/>
                 @yield('subcontent')
             </div>
             <div class="col-md-2">
