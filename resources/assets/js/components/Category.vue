@@ -48,7 +48,7 @@
         </div>
 
         <el-dialog :title="dialogFormTitle" v-model="dialogFormVisible" @close="reset(), readCategories()">
-        <span slot-scope="header" class="dialog-header">
+        <span slot="header" class="dialog-header">
           <i class="glyphicon glyphicon-plus"></i> New
         </span>
             <hr>
@@ -63,7 +63,7 @@
                 </el-form-item>
             </el-form>
             <hr>
-            <span slot-scope="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer">
             <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
             <el-button v-if="create" type="primary" @click="createCategory" icon="circle-check">Save</el-button>
             <el-button v-if="!create" type="primary" @click="updateCategory" icon="circle-check">Save</el-button>
@@ -72,7 +72,7 @@
 
         <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readCategories()">
             <span>Please confirm this action.</span>
-            <span slot-scope="footer" class="dialog-footer">
+            <span slot="footer" class="dialog-footer">
                 <el-button @click="confirmationDialogVisible = false">Cancel</el-button>
                 <el-button type="primary" @click="deleteCategory(rowToDelete)">Confirm</el-button>
             </span>
