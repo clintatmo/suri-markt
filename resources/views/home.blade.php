@@ -50,7 +50,6 @@
                                     <a href="{{ route('currencies') }}"><i class="fa fa-fw fa-folder"></i> Currency </a>
                                 </li>
                             </ul>
-
                         </div>
                     </div>
                 </div>
