@@ -40,11 +40,14 @@
                                 <li class="{{ Request::is('categories') ? 'active' : '' }}">
                                     <a href="{{ route('categories') }}"><i class="fa fa-fw fa-folder"></i> Category </a>
                                 </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder"></i> Districten </a>
+                                <li class="{{ Request::is('conditions') ? 'active' : '' }}">
+                                    <a href="{{ route('conditions') }}"><i class="fa fa-fw fa-folder"></i> Condition </a>
                                 </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder"></i> Status </a>
+                                <li class="{{ Request::is('districts') ? 'active' : '' }}">
+                                    <a href="{{ route('districts') }}"><i class="fa fa-fw fa-folder"></i> District </a>
+                                </li>
+                                <li class="{{ Request::is('currencies') ? 'active' : '' }}">
+                                    <a href="{{ route('currencies') }}"><i class="fa fa-fw fa-folder"></i> Currency </a>
                                 </li>
                             </ul>
 

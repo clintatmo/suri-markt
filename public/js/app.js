@@ -29981,22 +29981,18 @@ module.exports = __webpack_require__(248);
 
 /***/ }),
 /* 153 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css__ = __webpack_require__(195);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_element_ui_lib_theme_default_index_css__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_moment__);
 
 
-var _elementUi = __webpack_require__(154);
-
-var _elementUi2 = _interopRequireDefault(_elementUi);
-
-__webpack_require__(195);
-
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -30007,8 +30003,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 __webpack_require__(203);
 
 window.Vue = __webpack_require__(4);
-Vue.use(_elementUi2.default);
-Vue.use(_moment2.default);
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_element_ui___default.a);
+Vue.use(__WEBPACK_IMPORTED_MODULE_2_moment___default.a);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -67015,8 +67011,6 @@ webpackContext.id = 202;
 /* 203 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
 
 window._ = __webpack_require__(204);
 
@@ -97920,14 +97914,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 228 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -97945,11 +97935,11 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         console.log('Component mounted.');
     }
-};
+});
 
 /***/ }),
 /* 229 */
@@ -98044,14 +98034,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 231 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -98175,7 +98161,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             task: {
@@ -98270,7 +98256,7 @@ exports.default = {
             }
         }
     }
-};
+});
 
 /***/ }),
 /* 232 */
@@ -98741,14 +98727,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 234 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -98826,7 +98808,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             category: {
@@ -98924,7 +98906,7 @@ exports.default = {
             }).catch(function (error) {});
         }
     }
-};
+});
 
 /***/ }),
 /* 235 */
@@ -99276,44 +99258,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 237 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -99391,7 +99339,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             condition: {
@@ -99399,7 +99347,12 @@ exports.default = {
             },
             errors: [],
             conditions: [],
-            update_condition: {}
+            update_condition: {},
+            dialogFormVisible: false,
+            dialogFormTitle: 'Add New Condition',
+            confirmationDialogVisible: false,
+            rowToDelete: null,
+            create: true
         };
     },
     mounted: function mounted() {
@@ -99407,8 +99360,10 @@ exports.default = {
     },
 
     methods: {
-        initAddCondition: function initAddCondition() {
-            $("#add_condition_model").modal("show");
+        initCreate: function initCreate() {
+            this.dialogFormTitle = 'Add New Condition';
+            this.dialogFormVisible = true;
+            this.create = true;
         },
         createCondition: function createCondition() {
             var _this = this;
@@ -99418,10 +99373,8 @@ exports.default = {
             }).then(function (response) {
 
                 _this.reset();
-
-                _this.conditions.push(response.data.condition);
-
-                $("#add_condition_model").modal("hide");
+                _this.readConditions();
+                _this.dialogFormVisible = false;
             }).catch(function (error) {
                 _this.errors = [];
 
@@ -99436,6 +99389,7 @@ exports.default = {
         },
         reset: function reset() {
             this.condition.name = '';
+            this.errors = [];
         },
         readConditions: function readConditions() {
             var _this2 = this;
@@ -99445,19 +99399,23 @@ exports.default = {
                 _this2.conditions = response.data.conditions;
             });
         },
-        initUpdate: function initUpdate(index) {
+        initUpdate: function initUpdate(row) {
             this.errors = [];
-            $("#update_condition_model").modal("show");
-            this.update_condition = this.conditions[index];
+            this.dialogFormTitle = 'Edit Condition';
+            this.dialogFormVisible = true;
+            this.condition = row;
+            this.create = false;
         },
         updateCondition: function updateCondition() {
             var _this3 = this;
 
-            axios.patch('/condition/' + this.update_condition.id, {
-                name: this.update_condition.name
+            axios.patch('/condition/' + this.condition.id, {
+                name: this.condition.name
             }).then(function (response) {
 
-                $("#update_condition_model").modal("hide");
+                _this3.reset();
+                _this3.dialogFormVisible = false;
+                _this3.readConditions();
             }).catch(function (error) {
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
@@ -99465,20 +99423,21 @@ exports.default = {
                 }
             });
         },
-        deleteCondition: function deleteCondition(index) {
+        initDelete: function initDelete(row) {
+            this.rowToDelete = row.id;
+            this.confirmationDialogVisible = true;
+        },
+        deleteCondition: function deleteCondition(id) {
             var _this4 = this;
 
-            var conf = confirm("Do you ready want to delete this condition?");
-            if (conf === true) {
+            axios.delete('/condition/' + id).then(function (response) {
 
-                axios.delete('/condition/' + this.conditions[index].id).then(function (response) {
-
-                    _this4.conditions.splice(index, 1);
-                }).catch(function (error) {});
-            }
+                _this4.confirmationDialogVisible = false;
+                _this4.readConditions();
+            }).catch(function (error) {});
         }
     }
-};
+});
 
 /***/ }),
 /* 238 */
@@ -99488,328 +99447,289 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-xs pull-right",
+              on: {
+                click: function($event) {
+                  _vm.initCreate()
+                }
+              }
+            },
+            [_vm._v("\n                + Add New Condition\n            ")]
+          ),
+          _vm._v("\n            My Conditions\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "panel-body" },
+          [
             _c(
-              "button",
+              "el-table",
               {
-                staticClass: "btn btn-primary btn-xs pull-right",
-                on: {
-                  click: function($event) {
-                    _vm.initAddCondition()
-                  }
+                staticStyle: { width: "100%" },
+                attrs: {
+                  data: _vm.conditions,
+                  border: "",
+                  stripe: "",
+                  height: "400",
+                  "default-sort": { prop: "name", order: "ascending" }
                 }
               },
               [
-                _vm._v(
-                  "\n                        + Add New Condition\n                    "
-                )
-              ]
-            ),
-            _vm._v("\n                    My Conditions\n                ")
-          ]),
+                _c("el-table-column", {
+                  attrs: { prop: "id", label: "#", width: "80", sortable: "" }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "name",
+                    label: "NAME",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: { fixed: "right", label: "Operations", width: "120" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initUpdate(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initDelete(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: _vm.dialogFormTitle },
+          on: {
+            close: function($event) {
+              _vm.reset(), _vm.readConditions()
+            }
+          },
+          model: {
+            value: _vm.dialogFormVisible,
+            callback: function($$v) {
+              _vm.dialogFormVisible = $$v
+            },
+            expression: "dialogFormVisible"
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "dialog-header",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("i", { staticClass: "glyphicon glyphicon-plus" }),
+              _vm._v(" New\n    ")
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm.conditions.length > 0
-              ? _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-bordered table-striped table-responsive"
-                  },
-                  [
-                    _c(
-                      "tbody",
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._l(_vm.conditions, function(condition, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(index + 1))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(condition.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.initUpdate(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.deleteCondition(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ])
-                        })
-                      ],
-                      2
-                    )
-                  ]
+          _c("hr"),
+          _vm._v(" "),
+          _vm.errors.length > 0
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("li", [_vm._v(_vm._s(error))])
+                  })
                 )
-              : _vm._e()
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "add_condition_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "el-form",
+            {
+              ref: "condition",
+              attrs: {
+                "label-position": "right",
+                model: _vm.condition,
+                "label-width": "120px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "Name", prop: "name" } },
+                [
+                  _c("el-input", {
+                    model: {
+                      value: _vm.condition.name,
+                      callback: function($$v) {
+                        _vm.condition.name = $$v
+                      },
+                      expression: "condition.name"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "default", icon: "circle-cross" },
+                  on: {
+                    click: function($event) {
+                      ;(_vm.dialogFormVisible = false), _vm.reset()
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.condition.name,
-                        expression: "condition.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      id: "name",
-                      placeholder: "Condition Name"
+              _vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.createCondition }
                     },
-                    domProps: { value: _vm.condition.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.condition.name = $event.target.value
-                      }
+                    [_vm._v("Save")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.updateCondition }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "Warning!", size: "tiny" },
+          on: {
+            close: function($event) {
+              _vm.readConditions()
+            }
+          },
+          model: {
+            value: _vm.confirmationDialogVisible,
+            callback: function($$v) {
+              _vm.confirmationDialogVisible = $$v
+            },
+            expression: "confirmationDialogVisible"
+          }
+        },
+        [
+          _c("span", [_vm._v("Please confirm this action.")]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.confirmationDialogVisible = false
                     }
-                  })
-                ])
-              ]),
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.createCondition }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "update_condition_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_condition.name,
-                        expression: "update_condition.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Condition Name" },
-                    domProps: { value: _vm.update_condition.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_condition.name = $event.target.value
-                      }
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteCondition(_vm.rowToDelete)
                     }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.updateCondition }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+                  }
+                },
+                [_vm._v("Confirm")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [
-        _vm._v(
-          "\n                                No.\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Action\n                            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add New Condition")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update Condition")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -99869,44 +99789,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 240 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -99984,7 +99870,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             currency: {
@@ -99992,7 +99878,12 @@ exports.default = {
             },
             errors: [],
             currencies: [],
-            update_currency: {}
+            update_currency: {},
+            dialogFormVisible: false,
+            dialogFormTitle: 'Add New Currency',
+            confirmationDialogVisible: false,
+            rowToDelete: null,
+            create: true
         };
     },
     mounted: function mounted() {
@@ -100000,8 +99891,10 @@ exports.default = {
     },
 
     methods: {
-        initAddCurrency: function initAddCurrency() {
-            $("#add_currency_model").modal("show");
+        initCreate: function initCreate() {
+            this.dialogFormTitle = 'Add New Currency';
+            this.dialogFormVisible = true;
+            this.create = true;
         },
         createCurrency: function createCurrency() {
             var _this = this;
@@ -100011,10 +99904,8 @@ exports.default = {
             }).then(function (response) {
 
                 _this.reset();
-
-                _this.currencies.push(response.data.currency);
-
-                $("#add_currency_model").modal("hide");
+                _this.readCurrencies();
+                _this.dialogFormVisible = false;
             }).catch(function (error) {
                 _this.errors = [];
 
@@ -100029,6 +99920,7 @@ exports.default = {
         },
         reset: function reset() {
             this.currency.name = '';
+            this.errors = [];
         },
         readCurrencies: function readCurrencies() {
             var _this2 = this;
@@ -100038,19 +99930,23 @@ exports.default = {
                 _this2.currencies = response.data.currencies;
             });
         },
-        initUpdate: function initUpdate(index) {
+        initUpdate: function initUpdate(row) {
             this.errors = [];
-            $("#update_currency_model").modal("show");
-            this.update_currency = this.currencies[index];
+            this.dialogFormTitle = 'Edit Currency';
+            this.dialogFormVisible = true;
+            this.currency = row;
+            this.create = false;
         },
         updateCurrency: function updateCurrency() {
             var _this3 = this;
 
-            axios.patch('/currency/' + this.update_currency.id, {
-                name: this.update_currency.name
+            axios.patch('/currency/' + this.currency.id, {
+                name: this.currency.name
             }).then(function (response) {
 
-                $("#update_currency_model").modal("hide");
+                _this3.reset();
+                _this3.dialogFormVisible = false;
+                _this3.readCurrencies();
             }).catch(function (error) {
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
@@ -100058,20 +99954,21 @@ exports.default = {
                 }
             });
         },
-        deleteCurrency: function deleteCurrency(index) {
+        initDelete: function initDelete(row) {
+            this.rowToDelete = row.id;
+            this.confirmationDialogVisible = true;
+        },
+        deleteCurrency: function deleteCurrency(id) {
             var _this4 = this;
 
-            var conf = confirm("Do you ready want to delete this currency?");
-            if (conf === true) {
+            axios.delete('/currency/' + id).then(function (response) {
 
-                axios.delete('/currency/' + this.currencies[index].id).then(function (response) {
-
-                    _this4.currencies.splice(index, 1);
-                }).catch(function (error) {});
-            }
+                _this4.confirmationDialogVisible = false;
+                _this4.readCurrencies();
+            }).catch(function (error) {});
         }
     }
-};
+});
 
 /***/ }),
 /* 241 */
@@ -100081,328 +99978,289 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-xs pull-right",
+              on: {
+                click: function($event) {
+                  _vm.initCreate()
+                }
+              }
+            },
+            [_vm._v("\n                + Add New Currency\n            ")]
+          ),
+          _vm._v("\n            My Currencies\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "panel-body" },
+          [
             _c(
-              "button",
+              "el-table",
               {
-                staticClass: "btn btn-primary btn-xs pull-right",
-                on: {
-                  click: function($event) {
-                    _vm.initAddCurrency()
-                  }
+                staticStyle: { width: "100%" },
+                attrs: {
+                  data: _vm.currencies,
+                  border: "",
+                  stripe: "",
+                  height: "400",
+                  "default-sort": { prop: "name", order: "ascending" }
                 }
               },
               [
-                _vm._v(
-                  "\n                        + Add New Currency\n                    "
-                )
-              ]
-            ),
-            _vm._v("\n                    My Currencies\n                ")
-          ]),
+                _c("el-table-column", {
+                  attrs: { prop: "id", label: "#", width: "80", sortable: "" }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "name",
+                    label: "NAME",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: { fixed: "right", label: "Operations", width: "120" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initUpdate(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initDelete(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: _vm.dialogFormTitle },
+          on: {
+            close: function($event) {
+              _vm.reset(), _vm.readCurrencies()
+            }
+          },
+          model: {
+            value: _vm.dialogFormVisible,
+            callback: function($$v) {
+              _vm.dialogFormVisible = $$v
+            },
+            expression: "dialogFormVisible"
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "dialog-header",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("i", { staticClass: "glyphicon glyphicon-plus" }),
+              _vm._v(" New\n    ")
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm.currencies.length > 0
-              ? _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-bordered table-striped table-responsive"
-                  },
-                  [
-                    _c(
-                      "tbody",
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._l(_vm.currencies, function(currency, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(index + 1))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(currency.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.initUpdate(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.deleteCurrency(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ])
-                        })
-                      ],
-                      2
-                    )
-                  ]
+          _c("hr"),
+          _vm._v(" "),
+          _vm.errors.length > 0
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("li", [_vm._v(_vm._s(error))])
+                  })
                 )
-              : _vm._e()
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "add_currency_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "el-form",
+            {
+              ref: "currency",
+              attrs: {
+                "label-position": "right",
+                model: _vm.currency,
+                "label-width": "120px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "Name", prop: "name" } },
+                [
+                  _c("el-input", {
+                    model: {
+                      value: _vm.currency.name,
+                      callback: function($$v) {
+                        _vm.currency.name = $$v
+                      },
+                      expression: "currency.name"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "default", icon: "circle-cross" },
+                  on: {
+                    click: function($event) {
+                      ;(_vm.dialogFormVisible = false), _vm.reset()
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.currency.name,
-                        expression: "currency.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      id: "name",
-                      placeholder: "Currency Name"
+              _vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.createCurrency }
                     },
-                    domProps: { value: _vm.currency.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.currency.name = $event.target.value
-                      }
+                    [_vm._v("Save")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.updateCurrency }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "Warning!", size: "tiny" },
+          on: {
+            close: function($event) {
+              _vm.readCurrencies()
+            }
+          },
+          model: {
+            value: _vm.confirmationDialogVisible,
+            callback: function($$v) {
+              _vm.confirmationDialogVisible = $$v
+            },
+            expression: "confirmationDialogVisible"
+          }
+        },
+        [
+          _c("span", [_vm._v("Please confirm this action.")]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.confirmationDialogVisible = false
                     }
-                  })
-                ])
-              ]),
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.createCurrency }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "update_currency_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_currency.name,
-                        expression: "update_currency.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Currency Name" },
-                    domProps: { value: _vm.update_currency.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_currency.name = $event.target.value
-                      }
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteCurrency(_vm.rowToDelete)
                     }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.updateCurrency }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+                  }
+                },
+                [_vm._v("Confirm")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [
-        _vm._v(
-          "\n                                No.\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Action\n                            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add New Currency")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update Currency")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -100462,44 +100320,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 243 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -100577,7 +100401,7 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             district: {
@@ -100585,7 +100409,12 @@ exports.default = {
             },
             errors: [],
             districts: [],
-            update_district: {}
+            update_district: {},
+            dialogFormVisible: false,
+            dialogFormTitle: 'Add New District',
+            confirmationDialogVisible: false,
+            rowToDelete: null,
+            create: true
         };
     },
     mounted: function mounted() {
@@ -100593,8 +100422,10 @@ exports.default = {
     },
 
     methods: {
-        initAddDistrict: function initAddDistrict() {
-            $("#add_district_model").modal("show");
+        initCreate: function initCreate() {
+            this.dialogFormTitle = 'Add New District';
+            this.dialogFormVisible = true;
+            this.create = true;
         },
         createDistrict: function createDistrict() {
             var _this = this;
@@ -100604,10 +100435,8 @@ exports.default = {
             }).then(function (response) {
 
                 _this.reset();
-
-                _this.districts.push(response.data.district);
-
-                $("#add_district_model").modal("hide");
+                _this.readDistricts();
+                _this.dialogFormVisible = false;
             }).catch(function (error) {
                 _this.errors = [];
 
@@ -100622,6 +100451,7 @@ exports.default = {
         },
         reset: function reset() {
             this.district.name = '';
+            this.errors = [];
         },
         readDistricts: function readDistricts() {
             var _this2 = this;
@@ -100631,19 +100461,23 @@ exports.default = {
                 _this2.districts = response.data.districts;
             });
         },
-        initUpdate: function initUpdate(index) {
+        initUpdate: function initUpdate(row) {
             this.errors = [];
-            $("#update_district_model").modal("show");
-            this.update_district = this.districts[index];
+            this.dialogFormTitle = 'Edit District';
+            this.dialogFormVisible = true;
+            this.district = row;
+            this.create = false;
         },
         updateDistrict: function updateDistrict() {
             var _this3 = this;
 
-            axios.patch('/district/' + this.update_district.id, {
-                name: this.update_district.name
+            axios.patch('/district/' + this.district.id, {
+                name: this.district.name
             }).then(function (response) {
 
-                $("#update_district_model").modal("hide");
+                _this3.reset();
+                _this3.dialogFormVisible = false;
+                _this3.readDistricts();
             }).catch(function (error) {
                 _this3.errors = [];
                 if (error.response.data.errors.name) {
@@ -100651,20 +100485,21 @@ exports.default = {
                 }
             });
         },
-        deleteDistrict: function deleteDistrict(index) {
+        initDelete: function initDelete(row) {
+            this.rowToDelete = row.id;
+            this.confirmationDialogVisible = true;
+        },
+        deleteDistrict: function deleteDistrict(id) {
             var _this4 = this;
 
-            var conf = confirm("Do you ready want to delete this district?");
-            if (conf === true) {
+            axios.delete('/district/' + id).then(function (response) {
 
-                axios.delete('/district/' + this.districts[index].id).then(function (response) {
-
-                    _this4.districts.splice(index, 1);
-                }).catch(function (error) {});
-            }
+                _this4.confirmationDialogVisible = false;
+                _this4.readDistricts();
+            }).catch(function (error) {});
         }
     }
-};
+});
 
 /***/ }),
 /* 244 */
@@ -100674,328 +100509,289 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "panel panel-default" }, [
+        _c("div", { staticClass: "panel-heading" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary btn-xs pull-right",
+              on: {
+                click: function($event) {
+                  _vm.initCreate()
+                }
+              }
+            },
+            [_vm._v("\n                + Add New District\n            ")]
+          ),
+          _vm._v("\n            My Districts\n        ")
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "panel-body" },
+          [
             _c(
-              "button",
+              "el-table",
               {
-                staticClass: "btn btn-primary btn-xs pull-right",
-                on: {
-                  click: function($event) {
-                    _vm.initAddDistrict()
-                  }
+                staticStyle: { width: "100%" },
+                attrs: {
+                  data: _vm.districts,
+                  border: "",
+                  stripe: "",
+                  height: "400",
+                  "default-sort": { prop: "name", order: "ascending" }
                 }
               },
               [
-                _vm._v(
-                  "\n                        + Add New District\n                    "
-                )
-              ]
-            ),
-            _vm._v("\n                    My Districts\n                ")
-          ]),
+                _c("el-table-column", {
+                  attrs: { prop: "id", label: "#", width: "80", sortable: "" }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "name",
+                    label: "NAME",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: { fixed: "right", label: "Operations", width: "120" },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initUpdate(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Edit")]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "el-button",
+                            {
+                              attrs: { type: "text", size: "small" },
+                              on: {
+                                click: function($event) {
+                                  _vm.initDelete(scope.row)
+                                }
+                              }
+                            },
+                            [_vm._v("Delete")]
+                          )
+                        ]
+                      }
+                    }
+                  ])
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: _vm.dialogFormTitle },
+          on: {
+            close: function($event) {
+              _vm.reset(), _vm.readDistricts()
+            }
+          },
+          model: {
+            value: _vm.dialogFormVisible,
+            callback: function($$v) {
+              _vm.dialogFormVisible = $$v
+            },
+            expression: "dialogFormVisible"
+          }
+        },
+        [
+          _c(
+            "span",
+            {
+              staticClass: "dialog-header",
+              attrs: { slot: "header" },
+              slot: "header"
+            },
+            [
+              _c("i", { staticClass: "glyphicon glyphicon-plus" }),
+              _vm._v(" New\n    ")
+            ]
+          ),
           _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm.districts.length > 0
-              ? _c(
-                  "table",
-                  {
-                    staticClass:
-                      "table table-bordered table-striped table-responsive"
-                  },
-                  [
-                    _c(
-                      "tbody",
-                      [
-                        _vm._m(0),
-                        _vm._v(" "),
-                        _vm._l(_vm.districts, function(district, index) {
-                          return _c("tr", [
-                            _c("td", [_vm._v(_vm._s(index + 1))]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _vm._v(
-                                "\n                                " +
-                                  _vm._s(district.name) +
-                                  "\n                            "
-                              )
-                            ]),
-                            _vm._v(" "),
-                            _c("td", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-success btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.initUpdate(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-xs",
-                                  on: {
-                                    click: function($event) {
-                                      _vm.deleteDistrict(index)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          ])
-                        })
-                      ],
-                      2
-                    )
-                  ]
+          _c("hr"),
+          _vm._v(" "),
+          _vm.errors.length > 0
+            ? _c("div", { staticClass: "alert alert-danger" }, [
+                _c(
+                  "ul",
+                  _vm._l(_vm.errors, function(error) {
+                    return _c("li", [_vm._v(_vm._s(error))])
+                  })
                 )
-              : _vm._e()
-          ])
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "add_district_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(1),
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "el-form",
+            {
+              ref: "district",
+              attrs: {
+                "label-position": "right",
+                model: _vm.district,
+                "label-width": "120px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "Name", prop: "name" } },
+                [
+                  _c("el-input", {
+                    model: {
+                      value: _vm.district.name,
+                      callback: function($$v) {
+                        _vm.district.name = $$v
+                      },
+                      expression: "district.name"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("hr"),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "default", icon: "circle-cross" },
+                  on: {
+                    click: function($event) {
+                      ;(_vm.dialogFormVisible = false), _vm.reset()
+                    }
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", { attrs: { for: "name" } }, [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.district.name,
-                        expression: "district.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      name: "name",
-                      id: "name",
-                      placeholder: "District Name"
+              _vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.createDistrict }
                     },
-                    domProps: { value: _vm.district.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.district.name = $event.target.value
-                      }
+                    [_vm._v("Save")]
+                  )
+                : _vm._e(),
+              _vm._v(" "),
+              !_vm.create
+                ? _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", icon: "circle-check" },
+                      on: { click: _vm.updateDistrict }
+                    },
+                    [_vm._v("Save")]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "Warning!", size: "tiny" },
+          on: {
+            close: function($event) {
+              _vm.readDistricts()
+            }
+          },
+          model: {
+            value: _vm.confirmationDialogVisible,
+            callback: function($$v) {
+              _vm.confirmationDialogVisible = $$v
+            },
+            expression: "confirmationDialogVisible"
+          }
+        },
+        [
+          _c("span", [_vm._v("Please confirm this action.")]),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.confirmationDialogVisible = false
                     }
-                  })
-                ])
-              ]),
+                  }
+                },
+                [_vm._v("Cancel")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.createDistrict }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "modal fade",
-        attrs: { tabindex: "-1", role: "dialog", id: "update_district_model" }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _vm.errors.length > 0
-                  ? _c("div", { staticClass: "alert alert-danger" }, [
-                      _c(
-                        "ul",
-                        _vm._l(_vm.errors, function(error) {
-                          return _c("li", [_vm._v(_vm._s(error))])
-                        })
-                      )
-                    ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Name:")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.update_district.name,
-                        expression: "update_district.name"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "District Name" },
-                    domProps: { value: _vm.update_district.name },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.update_district.name = $event.target.value
-                      }
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.deleteDistrict(_vm.rowToDelete)
                     }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-footer" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-default",
-                    attrs: { type: "button", "data-dismiss": "modal" }
-                  },
-                  [_vm._v("Close")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.updateDistrict }
-                  },
-                  [_vm._v("Submit")]
-                )
-              ])
-            ])
-          ]
-        )
-      ]
-    )
-  ])
+                  }
+                },
+                [_vm._v("Confirm")]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    ],
+    1
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("tr", [
-      _c("th", [
-        _vm._v(
-          "\n                                No.\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Name\n                            "
-        )
-      ]),
-      _vm._v(" "),
-      _c("th", [
-        _vm._v(
-          "\n                                Action\n                            "
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add New District")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update District")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -101055,44 +100851,38 @@ module.exports = Component.exports
 
 /***/ }),
 /* 246 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _moment = __webpack_require__(0);
-
-var _moment2 = _interopRequireDefault(_moment);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = {
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            currentDate: (0, _moment2.default)().format("YYYY")
+            currentDate: __WEBPACK_IMPORTED_MODULE_0_moment___default()().format("YYYY")
         };
     },
     mounted: function mounted() {},
 
     methods: {}
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+});
 
 /***/ }),
 /* 247 */

@@ -1,105 +1,75 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <button @click="initAddDistrict()" class="btn btn-primary btn-xs pull-right">
-                            + Add New District
-                        </button>
-                        My Districts
-                    </div>
-
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="districts.length > 0">
-                            <tbody>
-                            <tr>
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                            <tr v-for="(district, index) in districts">
-                                <td>{{ index + 1 }}</td>
-                                <td>
-                                    {{ district.name }}
-                                </td>
-                                <td>
-                                    <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
-                                    <button @click="deleteDistrict(index)" class="btn btn-danger btn-xs">Delete</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button @click="initCreate()" class="btn btn-primary btn-xs pull-right">
+                    + Add New District
+                </button>
+                My Districts
+            </div>
+            <div class="panel-body">
+                <el-table
+                        :data="districts"
+                        border
+                        stripe
+                        height="400"
+                        :default-sort = "{prop: 'name', order: 'ascending'}"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="id"
+                            label="#"
+                            width="80"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="NAME"
+                            width="400"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            fixed="right"
+                            label="Operations"
+                            width="120">
+                        <template scope="scope">
+                            <el-button @click="initUpdate(scope.row)" type="text" size="small">Edit</el-button>
+                            <el-button @click="initDelete(scope.row)" type="text" size="small">Delete</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="add_district_model">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Add New District</h4>
-                    </div>
-                    <div class="modal-body">
+        <el-dialog :title="dialogFormTitle" v-model="dialogFormVisible" @close="reset(), readDistricts()">
+        <span slot="header" class="dialog-header">
+          <i class="glyphicon glyphicon-plus"></i> New
+        </span>
+            <hr>
+            <div class="alert alert-danger" v-if="errors.length > 0">
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </div>
+            <el-form ref="district" label-position="right" :model="district" label-width="120px">
+                <el-form-item label="Name" prop="name">
+                    <el-input v-model="district.name"></el-input>
+                </el-form-item>
+            </el-form>
+            <hr>
+            <span slot="footer" class="dialog-footer">
+            <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
+            <el-button v-if="create" type="primary" @click="createDistrict" icon="circle-check">Save</el-button>
+            <el-button v-if="!create" type="primary" @click="updateDistrict" icon="circle-check">Save</el-button>
+        </span>
+        </el-dialog>
 
-                        <div class="alert alert-danger" v-if="errors.length > 0">
-                            <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" placeholder="District Name" class="form-control"
-                                   v-model="district.name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="createDistrict" class="btn btn-primary">Submit</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="update_district_model">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Update District</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="alert alert-danger" v-if="errors.length > 0">
-                            <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Name:</label>
-                            <input type="text" placeholder="District Name" class="form-control"
-                                   v-model="update_district.name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="updateDistrict" class="btn btn-primary">Submit</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readDistricts()">
+            <span>Please confirm this action.</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="confirmationDialogVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="deleteDistrict(rowToDelete)">Confirm</el-button>
+            </span>
+        </el-dialog>
 
     </div>
 </template>
@@ -113,15 +83,22 @@
                 },
                 errors: [],
                 districts: [],
-                update_district: {}
+                update_district: {},
+                dialogFormVisible: false,
+                dialogFormTitle: 'Add New District',
+                confirmationDialogVisible: false,
+                rowToDelete: null,
+                create: true
             }
         },
         mounted() {
             this.readDistricts();
         },
         methods: {
-            initAddDistrict() {
-                $("#add_district_model").modal("show");
+            initCreate() {
+                this.dialogFormTitle = 'Add New District';
+                this.dialogFormVisible = true;
+                this.create = true;
             },
             createDistrict() {
                 axios.post('/district', {
@@ -130,10 +107,8 @@
                     .then(response => {
 
                         this.reset();
-
-                        this.districts.push(response.data.district);
-
-                        $("#add_district_model").modal("hide");
+                        this.readDistricts();
+                        this.dialogFormVisible = false;
 
                     })
                     .catch(error => {
@@ -150,6 +125,7 @@
             },
             reset() {
                 this.district.name = '';
+                this.errors = [];
             },
             readDistricts() {
                 axios.get('/district')
@@ -159,19 +135,22 @@
 
                     });
             },
-            initUpdate(index) {
+            initUpdate(row) {
                 this.errors = [];
-                $("#update_district_model").modal("show");
-                this.update_district = this.districts[index];
+                this.dialogFormTitle = 'Edit District';
+                this.dialogFormVisible = true;
+                this.district = row;
+                this.create = false;
             },
             updateDistrict() {
-                axios.patch('/district/' + this.update_district.id, {
-                    name: this.update_district.name
+                axios.patch('/district/' + this.district.id, {
+                    name: this.district.name
                 })
                     .then(response => {
 
-                        $("#update_district_model").modal("hide");
-
+                        this.reset();
+                        this.dialogFormVisible = false;
+                        this.readDistricts();
                     })
                     .catch(error => {
                         this.errors = [];
@@ -180,20 +159,21 @@
                         }
                     });
             },
-            deleteDistrict(index) {
-                let conf = confirm("Do you ready want to delete this district?");
-                if (conf === true) {
+            initDelete(row) {
+                this.rowToDelete = row.id;
+                this.confirmationDialogVisible = true;
+            },
+            deleteDistrict(id) {
+                axios.delete('/district/' + id)
+                    .then(response => {
 
-                    axios.delete('/district/' + this.districts[index].id)
-                        .then(response => {
+                        this.confirmationDialogVisible = false;
+                        this.readDistricts();
 
-                            this.districts.splice(index, 1);
+                    })
+                    .catch(error => {
 
-                        })
-                        .catch(error => {
-
-                        });
-                }
+                    });
             }
         }
     }

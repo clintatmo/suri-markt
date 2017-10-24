@@ -1,105 +1,75 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <button @click="initAddCurrency()" class="btn btn-primary btn-xs pull-right">
-                            + Add New Currency
-                        </button>
-                        My Currencies
-                    </div>
-
-                    <div class="panel-body">
-                        <table class="table table-bordered table-striped table-responsive" v-if="currencies.length > 0">
-                            <tbody>
-                            <tr>
-                                <th>
-                                    No.
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Action
-                                </th>
-                            </tr>
-                            <tr v-for="(currency, index) in currencies">
-                                <td>{{ index + 1 }}</td>
-                                <td>
-                                    {{ currency.name }}
-                                </td>
-                                <td>
-                                    <button @click="initUpdate(index)" class="btn btn-success btn-xs">Edit</button>
-                                    <button @click="deleteCurrency(index)" class="btn btn-danger btn-xs">Delete</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+    <div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <button @click="initCreate()" class="btn btn-primary btn-xs pull-right">
+                    + Add New Currency
+                </button>
+                My Currencies
+            </div>
+            <div class="panel-body">
+                <el-table
+                        :data="currencies"
+                        border
+                        stripe
+                        height="400"
+                        :default-sort = "{prop: 'name', order: 'ascending'}"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="id"
+                            label="#"
+                            width="80"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="NAME"
+                            width="400"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            fixed="right"
+                            label="Operations"
+                            width="120">
+                        <template scope="scope">
+                            <el-button @click="initUpdate(scope.row)" type="text" size="small">Edit</el-button>
+                            <el-button @click="initDelete(scope.row)" type="text" size="small">Delete</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </div>
         </div>
 
-        <div class="modal fade" tabindex="-1" role="dialog" id="add_currency_model">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Add New Currency</h4>
-                    </div>
-                    <div class="modal-body">
+        <el-dialog :title="dialogFormTitle" v-model="dialogFormVisible" @close="reset(), readCurrencies()">
+        <span slot="header" class="dialog-header">
+          <i class="glyphicon glyphicon-plus"></i> New
+        </span>
+            <hr>
+            <div class="alert alert-danger" v-if="errors.length > 0">
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </div>
+            <el-form ref="currency" label-position="right" :model="currency" label-width="120px">
+                <el-form-item label="Name" prop="name">
+                    <el-input v-model="currency.name"></el-input>
+                </el-form-item>
+            </el-form>
+            <hr>
+            <span slot="footer" class="dialog-footer">
+            <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
+            <el-button v-if="create" type="primary" @click="createCurrency" icon="circle-check">Save</el-button>
+            <el-button v-if="!create" type="primary" @click="updateCurrency" icon="circle-check">Save</el-button>
+        </span>
+        </el-dialog>
 
-                        <div class="alert alert-danger" v-if="errors.length > 0">
-                            <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" name="name" id="name" placeholder="Currency Name" class="form-control"
-                                   v-model="currency.name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="createCurrency" class="btn btn-primary">Submit</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-        <div class="modal fade" tabindex="-1" role="dialog" id="update_currency_model">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Update Currency</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="alert alert-danger" v-if="errors.length > 0">
-                            <ul>
-                                <li v-for="error in errors">{{ error }}</li>
-                            </ul>
-                        </div>
-
-                        <div class="form-group">
-                            <label>Name:</label>
-                            <input type="text" placeholder="Currency Name" class="form-control"
-                                   v-model="update_currency.name">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" @click="updateCurrency" class="btn btn-primary">Submit</button>
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
+        <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readCurrencies()">
+            <span>Please confirm this action.</span>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="confirmationDialogVisible = false">Cancel</el-button>
+                <el-button type="primary" @click="deleteCurrency(rowToDelete)">Confirm</el-button>
+            </span>
+        </el-dialog>
 
     </div>
 </template>
@@ -113,15 +83,22 @@
                 },
                 errors: [],
                 currencies: [],
-                update_currency: {}
+                update_currency: {},
+                dialogFormVisible: false,
+                dialogFormTitle: 'Add New Currency',
+                confirmationDialogVisible: false,
+                rowToDelete: null,
+                create: true
             }
         },
         mounted() {
             this.readCurrencies();
         },
         methods: {
-            initAddCurrency() {
-                $("#add_currency_model").modal("show");
+            initCreate() {
+                this.dialogFormTitle = 'Add New Currency';
+                this.dialogFormVisible = true;
+                this.create = true;
             },
             createCurrency() {
                 axios.post('/currency', {
@@ -130,10 +107,8 @@
                     .then(response => {
 
                         this.reset();
-
-                        this.currencies.push(response.data.currency);
-
-                        $("#add_currency_model").modal("hide");
+                        this.readCurrencies();
+                        this.dialogFormVisible = false;
 
                     })
                     .catch(error => {
@@ -150,6 +125,7 @@
             },
             reset() {
                 this.currency.name = '';
+                this.errors = [];
             },
             readCurrencies() {
                 axios.get('/currency')
@@ -159,19 +135,22 @@
 
                     });
             },
-            initUpdate(index) {
+            initUpdate(row) {
                 this.errors = [];
-                $("#update_currency_model").modal("show");
-                this.update_currency = this.currencies[index];
+                this.dialogFormTitle = 'Edit Currency';
+                this.dialogFormVisible = true;
+                this.currency = row;
+                this.create = false;
             },
             updateCurrency() {
-                axios.patch('/currency/' + this.update_currency.id, {
-                    name: this.update_currency.name
+                axios.patch('/currency/' + this.currency.id, {
+                    name: this.currency.name
                 })
                     .then(response => {
 
-                        $("#update_currency_model").modal("hide");
-
+                        this.reset();
+                        this.dialogFormVisible = false;
+                        this.readCurrencies();
                     })
                     .catch(error => {
                         this.errors = [];
@@ -180,20 +159,21 @@
                         }
                     });
             },
-            deleteCurrency(index) {
-                let conf = confirm("Do you ready want to delete this currency?");
-                if (conf === true) {
+            initDelete(row) {
+                this.rowToDelete = row.id;
+                this.confirmationDialogVisible = true;
+            },
+            deleteCurrency(id) {
+                axios.delete('/currency/' + id)
+                    .then(response => {
 
-                    axios.delete('/currency/' + this.currencies[index].id)
-                        .then(response => {
+                        this.confirmationDialogVisible = false;
+                        this.readCurrencies();
 
-                            this.currencies.splice(index, 1);
+                    })
+                    .catch(error => {
 
-                        })
-                        .catch(error => {
-
-                        });
-                }
+                    });
             }
         }
     }

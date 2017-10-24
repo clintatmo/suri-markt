@@ -21,6 +21,15 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/categories', function () {
     return view('category');
 })->name('categories');
+Route::get('/admin/conditions', function () {
+    return view('condition');
+})->name('conditions');
+Route::get('/admin/currencies', function () {
+    return view('currency');
+})->name('currencies');
+Route::get('/admin/districts', function () {
+    return view('district');
+})->name('districts');
 
 Route::resource('/task', 'TaskController');
 Route::resource('/category', 'CategoryController');
