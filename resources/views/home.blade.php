@@ -77,16 +77,6 @@
                 </div>
             </div>
             <div class="col-md-8 col-md-offset-0">
-                <form class="form-horizontal" method="POST" action="{{ route('login') }}">
-                    {{ csrf_field() }}
-
-                    <div class="input-group">
-                        <input id="email" type="email" placeholder="Zoeken..." class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-                        <span class="input-group-btn">
-                            <button class="btn btn-primary" type="button">Zoeken!</button>
-                        </span>
-                    </div>
-                </form>
                 <br/>
                 @yield('subcontent')
             </div>

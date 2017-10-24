@@ -31,6 +31,8 @@ Route::get('/admin/districts', function () {
     return view('district');
 })->name('districts');
 
+Route::post('/category/search', 'CategoryController@search');
+
 Route::resource('/task', 'TaskController');
 Route::resource('/category', 'CategoryController');
 Route::resource('/condition', 'ConditionController');

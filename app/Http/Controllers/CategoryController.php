@@ -27,6 +27,20 @@ class CategoryController extends Controller
     }
 
     /**
+     * Search resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $categories = Category::where('name', 'LIKE', '%a%')->get();
+        return response()->json([
+            'categories'    => $categories,
+            'message' => 'Success'
+        ], 200);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

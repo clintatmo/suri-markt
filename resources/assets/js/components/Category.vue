@@ -1,5 +1,12 @@
 <template>
     <div>
+        <div class="input-group">
+            <input id="qry" type="text" v-model="qry" @keyup.enter.native="searchCategory()" placeholder="Zoeken..." class="form-control" name="qry" autofocus>
+            <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click="searchCategory()">Zoeken!</button>
+                        </span>
+        </div>
+        <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <button @click="initCreate()" class="btn btn-primary btn-xs pull-right">
@@ -41,7 +48,7 @@
         </div>
 
         <el-dialog :title="dialogFormTitle" v-model="dialogFormVisible" @close="reset(), readCategories()">
-        <span slot="header" class="dialog-header">
+        <span slot-scope="header" class="dialog-header">
           <i class="glyphicon glyphicon-plus"></i> New
         </span>
             <hr>
@@ -56,7 +63,7 @@
                 </el-form-item>
             </el-form>
             <hr>
-            <span slot="footer" class="dialog-footer">
+            <span slot-scope="footer" class="dialog-footer">
             <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
             <el-button v-if="create" type="primary" @click="createCategory" icon="circle-check">Save</el-button>
             <el-button v-if="!create" type="primary" @click="updateCategory" icon="circle-check">Save</el-button>
@@ -65,7 +72,7 @@
 
         <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readCategories()">
             <span>Please confirm this action.</span>
-            <span slot="footer" class="dialog-footer">
+            <span slot-scope="footer" class="dialog-footer">
                 <el-button @click="confirmationDialogVisible = false">Cancel</el-button>
                 <el-button type="primary" @click="deleteCategory(rowToDelete)">Confirm</el-button>
             </span>
@@ -88,7 +95,8 @@
                 dialogFormTitle: 'Add New Category',
                 confirmationDialogVisible: false,
                 rowToDelete: null,
-                create: true
+                create: true,
+                qry: ''
             }
         },
         mounted() {
@@ -169,6 +177,20 @@
 
                         this.confirmationDialogVisible = false;
                         this.readCategories();
+
+                    })
+                    .catch(error => {
+
+                    });
+            },
+            searchCategory() {
+                axios.post('/category/search', {
+                    qry: this.qry
+                })
+                    .then(response => {
+
+                        console.log(response);
+                        this.categories = response.data.categories;
 
                     })
                     .catch(error => {
