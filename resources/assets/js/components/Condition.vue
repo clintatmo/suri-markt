@@ -1,5 +1,17 @@
 <template>
-    <div>
+    <div v-loading.fullscreen.lock="loading">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>admin</el-breadcrumb-item>
+            <el-breadcrumb-item>conditions</el-breadcrumb-item>
+        </el-breadcrumb>
+        <br>
+        <div class="input-group">
+            <input id="qry" type="text" v-model="qry" @keyup.enter.native="searchCondition()" placeholder="Zoeken..." class="form-control" name="qry" autofocus>
+            <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click="searchCondition()">Zoeken!</button>
+                        </span>
+        </div>
+        <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <button @click="initCreate()" class="btn btn-primary btn-xs pull-right">
@@ -57,10 +69,10 @@
             </el-form>
             <hr>
             <span slot="footer" class="dialog-footer">
-            <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
-            <el-button v-if="create" type="primary" @click="createCondition" icon="circle-check">Save</el-button>
-            <el-button v-if="!create" type="primary" @click="updateCondition" icon="circle-check">Save</el-button>
-        </span>
+                <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
+                <el-button v-if="create" type="primary" @click="createCondition" icon="circle-check">Save</el-button>
+                <el-button v-if="!create" type="primary" @click="updateCondition" icon="circle-check">Save</el-button>
+            </span>
         </el-dialog>
 
         <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readConditions()">
@@ -88,7 +100,9 @@
                 dialogFormTitle: 'Add New Condition',
                 confirmationDialogVisible: false,
                 rowToDelete: null,
-                create: true
+                create: true,
+                qry: '',
+                loading: false
             }
         },
         mounted() {
@@ -128,11 +142,16 @@
                 this.errors = [];
             },
             readConditions() {
+                this.loading = true;
                 axios.get('/condition')
                     .then(response => {
 
                         this.conditions = response.data.conditions;
+                        this.loading = false;
 
+                    })
+                    .catch(error => {
+                        this.loading = false;
                     });
             },
             initUpdate(row) {
@@ -173,6 +192,22 @@
                     })
                     .catch(error => {
 
+                    });
+            },
+            searchCondition() {
+                this.loading = true;
+                axios.post('/condition/search', {
+                    qry: this.qry
+                })
+                    .then(response => {
+
+                        console.log(response);
+                        this.conditions = response.data.conditions;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
                     });
             }
         }

@@ -34,6 +34,9 @@ Route::get('/admin/districts', function () {
 })->name('districts')->middleware('auth');
 
 Route::post('/category/search', 'CategoryController@search');
+Route::post('/condition/search', 'ConditionController@search');
+Route::post('/district/search', 'DistrictController@search');
+Route::post('/currency/search', 'CurrencyController@search');
 
 Route::resource('/task', 'TaskController');
 Route::resource('/category', 'CategoryController');

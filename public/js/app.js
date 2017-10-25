@@ -100823,6 +100823,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -100967,6 +100972,19 @@ var render = function() {
       ]
     },
     [
+      _c(
+        "el-breadcrumb",
+        { attrs: { separator: "/" } },
+        [
+          _c("el-breadcrumb-item", [_vm._v("admin")]),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("categories")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("div", { staticClass: "input-group" }, [
         _c("input", {
           directives: [
@@ -101445,6 +101463,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -101459,7 +101489,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dialogFormTitle: 'Add New Condition',
             confirmationDialogVisible: false,
             rowToDelete: null,
-            create: true
+            create: true,
+            qry: '',
+            loading: false
         };
     },
     mounted: function mounted() {
@@ -101501,9 +101533,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         readConditions: function readConditions() {
             var _this2 = this;
 
+            this.loading = true;
             axios.get('/condition').then(function (response) {
 
                 _this2.conditions = response.data.conditions;
+                _this2.loading = false;
+            }).catch(function (error) {
+                _this2.loading = false;
             });
         },
         initUpdate: function initUpdate(row) {
@@ -101542,6 +101578,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.confirmationDialogVisible = false;
                 _this4.readConditions();
             }).catch(function (error) {});
+        },
+        searchCondition: function searchCondition() {
+            var _this5 = this;
+
+            this.loading = true;
+            axios.post('/condition/search', {
+                qry: this.qry
+            }).then(function (response) {
+
+                console.log(response);
+                _this5.conditions = response.data.conditions;
+                _this5.loading = false;
+            }).catch(function (error) {
+                _this5.loading = false;
+            });
         }
     }
 });
@@ -101556,7 +101607,90 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading.fullscreen.lock",
+          value: _vm.loading,
+          expression: "loading",
+          modifiers: { fullscreen: true, lock: true }
+        }
+      ]
+    },
     [
+      _c(
+        "el-breadcrumb",
+        { attrs: { separator: "/" } },
+        [
+          _c("el-breadcrumb-item", [_vm._v("admin")]),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("conditions")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.qry,
+              expression: "qry"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "qry",
+            type: "text",
+            placeholder: "Zoeken...",
+            name: "qry",
+            autofocus: ""
+          },
+          domProps: { value: _vm.qry },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.qry = $event.target.value
+            }
+          },
+          nativeOn: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key)
+              ) {
+                return null
+              }
+              _vm.searchCondition()
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.searchCondition()
+                }
+              }
+            },
+            [_vm._v("Zoeken!")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("div", { staticClass: "panel panel-default" }, [
         _c("div", { staticClass: "panel-heading" }, [
           _c(
@@ -101976,6 +102110,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -101990,7 +102136,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dialogFormTitle: 'Add New Currency',
             confirmationDialogVisible: false,
             rowToDelete: null,
-            create: true
+            create: true,
+            qry: '',
+            loading: false
         };
     },
     mounted: function mounted() {
@@ -102032,9 +102180,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         readCurrencies: function readCurrencies() {
             var _this2 = this;
 
+            this.loading = true;
             axios.get('/currency').then(function (response) {
 
                 _this2.currencies = response.data.currencies;
+                _this2.loading = false;
+            }).catch(function (error) {
+                _this2.loading = false;
             });
         },
         initUpdate: function initUpdate(row) {
@@ -102073,6 +102225,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.confirmationDialogVisible = false;
                 _this4.readCurrencies();
             }).catch(function (error) {});
+        },
+        searchCurrency: function searchCurrency() {
+            var _this5 = this;
+
+            this.loading = true;
+            axios.post('/currency/search', {
+                qry: this.qry
+            }).then(function (response) {
+
+                console.log(response);
+                _this5.currencies = response.data.currencies;
+                _this5.loading = false;
+            }).catch(function (error) {
+                _this5.loading = false;
+            });
         }
     }
 });
@@ -102087,7 +102254,90 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading.fullscreen.lock",
+          value: _vm.loading,
+          expression: "loading",
+          modifiers: { fullscreen: true, lock: true }
+        }
+      ]
+    },
     [
+      _c(
+        "el-breadcrumb",
+        { attrs: { separator: "/" } },
+        [
+          _c("el-breadcrumb-item", [_vm._v("admin")]),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("currencies")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.qry,
+              expression: "qry"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "qry",
+            type: "text",
+            placeholder: "Zoeken...",
+            name: "qry",
+            autofocus: ""
+          },
+          domProps: { value: _vm.qry },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.qry = $event.target.value
+            }
+          },
+          nativeOn: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key)
+              ) {
+                return null
+              }
+              _vm.searchCurrency()
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.searchCurrency()
+                }
+              }
+            },
+            [_vm._v("Zoeken!")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("div", { staticClass: "panel panel-default" }, [
         _c("div", { staticClass: "panel-heading" }, [
           _c(
@@ -102507,6 +102757,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -102521,7 +102783,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             dialogFormTitle: 'Add New District',
             confirmationDialogVisible: false,
             rowToDelete: null,
-            create: true
+            create: true,
+            qry: '',
+            loading: false
         };
     },
     mounted: function mounted() {
@@ -102563,9 +102827,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         readDistricts: function readDistricts() {
             var _this2 = this;
 
+            this.loading = true;
             axios.get('/district').then(function (response) {
 
                 _this2.districts = response.data.districts;
+                _this2.loading = false;
+            }).catch(function (error) {
+                _this2.loading = false;
             });
         },
         initUpdate: function initUpdate(row) {
@@ -102604,6 +102872,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this4.confirmationDialogVisible = false;
                 _this4.readDistricts();
             }).catch(function (error) {});
+        },
+        searchDistrict: function searchDistrict() {
+            var _this5 = this;
+
+            this.loading = true;
+            axios.post('/district/search', {
+                qry: this.qry
+            }).then(function (response) {
+
+                console.log(response);
+                _this5.districts = response.data.districts;
+                _this5.loading = false;
+            }).catch(function (error) {
+                _this5.loading = false;
+            });
         }
     }
 });
@@ -102618,7 +102901,90 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      directives: [
+        {
+          name: "loading",
+          rawName: "v-loading.fullscreen.lock",
+          value: _vm.loading,
+          expression: "loading",
+          modifiers: { fullscreen: true, lock: true }
+        }
+      ]
+    },
     [
+      _c(
+        "el-breadcrumb",
+        { attrs: { separator: "/" } },
+        [
+          _c("el-breadcrumb-item", [_vm._v("admin")]),
+          _vm._v(" "),
+          _c("el-breadcrumb-item", [_vm._v("districts")])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "input-group" }, [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.qry,
+              expression: "qry"
+            }
+          ],
+          staticClass: "form-control",
+          attrs: {
+            id: "qry",
+            type: "text",
+            placeholder: "Zoeken...",
+            name: "qry",
+            autofocus: ""
+          },
+          domProps: { value: _vm.qry },
+          on: {
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.qry = $event.target.value
+            }
+          },
+          nativeOn: {
+            keyup: function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key)
+              ) {
+                return null
+              }
+              _vm.searchDistrict()
+            }
+          }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "input-group-btn" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: {
+                click: function($event) {
+                  _vm.searchDistrict()
+                }
+              }
+            },
+            [_vm._v("Zoeken!")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
       _c("div", { staticClass: "panel panel-default" }, [
         _c("div", { staticClass: "panel-heading" }, [
           _c(

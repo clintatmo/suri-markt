@@ -1,5 +1,17 @@
 <template>
-    <div>
+    <div v-loading.fullscreen.lock="loading">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>admin</el-breadcrumb-item>
+            <el-breadcrumb-item>districts</el-breadcrumb-item>
+        </el-breadcrumb>
+        <br>
+        <div class="input-group">
+            <input id="qry" type="text" v-model="qry" @keyup.enter.native="searchDistrict()" placeholder="Zoeken..." class="form-control" name="qry" autofocus>
+            <span class="input-group-btn">
+                            <button class="btn btn-primary" type="button" @click="searchDistrict()">Zoeken!</button>
+                        </span>
+        </div>
+        <br>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <button @click="initCreate()" class="btn btn-primary btn-xs pull-right">
@@ -57,10 +69,10 @@
             </el-form>
             <hr>
             <span slot="footer" class="dialog-footer">
-            <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
-            <el-button v-if="create" type="primary" @click="createDistrict" icon="circle-check">Save</el-button>
-            <el-button v-if="!create" type="primary" @click="updateDistrict" icon="circle-check">Save</el-button>
-        </span>
+                <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
+                <el-button v-if="create" type="primary" @click="createDistrict" icon="circle-check">Save</el-button>
+                <el-button v-if="!create" type="primary" @click="updateDistrict" icon="circle-check">Save</el-button>
+            </span>
         </el-dialog>
 
         <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readDistricts()">
@@ -88,7 +100,9 @@
                 dialogFormTitle: 'Add New District',
                 confirmationDialogVisible: false,
                 rowToDelete: null,
-                create: true
+                create: true,
+                qry: '',
+                loading: false
             }
         },
         mounted() {
@@ -128,11 +142,16 @@
                 this.errors = [];
             },
             readDistricts() {
+                this.loading = true;
                 axios.get('/district')
                     .then(response => {
 
                         this.districts = response.data.districts;
+                        this.loading = false;
 
+                    })
+                    .catch(error => {
+                        this.loading = false;
                     });
             },
             initUpdate(row) {
@@ -173,6 +192,22 @@
                     })
                     .catch(error => {
 
+                    });
+            },
+            searchDistrict() {
+                this.loading = true;
+                axios.post('/district/search', {
+                    qry: this.qry
+                })
+                    .then(response => {
+
+                        console.log(response);
+                        this.districts = response.data.districts;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
                     });
             }
         }

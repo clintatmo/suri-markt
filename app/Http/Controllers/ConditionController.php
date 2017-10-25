@@ -27,6 +27,21 @@ class ConditionController extends Controller
     }
 
     /**
+     * Search resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $conditions = Condition::where('name', 'LIKE', '%a%')->get();
+        return response()->json([
+            'conditions'    => $conditions,
+            'message' => 'Success'
+        ], 200);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

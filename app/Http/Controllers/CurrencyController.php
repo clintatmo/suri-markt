@@ -27,6 +27,20 @@ class CurrencyController extends Controller
     }
 
     /**
+     * Search resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $currencies = Currency::where('name', 'LIKE', '%a%')->get();
+        return response()->json([
+            'currencies'    => $currencies,
+            'message' => 'Success'
+        ], 200);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

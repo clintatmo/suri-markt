@@ -1,5 +1,10 @@
 <template>
     <div v-loading.fullscreen.lock="loading">
+        <el-breadcrumb separator="/">
+            <el-breadcrumb-item>admin</el-breadcrumb-item>
+            <el-breadcrumb-item>categories</el-breadcrumb-item>
+        </el-breadcrumb>
+        <br>
         <div class="input-group">
             <input id="qry" type="text" v-model="qry" @keyup.enter.native="searchCategory()" placeholder="Zoeken..." class="form-control" name="qry" autofocus>
             <span class="input-group-btn">

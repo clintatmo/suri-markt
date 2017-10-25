@@ -27,6 +27,20 @@ class DistrictController extends Controller
     }
 
     /**
+     * Search resource in storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search()
+    {
+        $districts = District::where('name', 'LIKE', '%a%')->get();
+        return response()->json([
+            'districts'    => $districts,
+            'message' => 'Success'
+        ], 200);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
