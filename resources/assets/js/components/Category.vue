@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-loading.fullscreen.lock="loading">
         <div class="input-group">
             <input id="qry" type="text" v-model="qry" @keyup.enter.native="searchCategory()" placeholder="Zoeken..." class="form-control" name="qry" autofocus>
             <span class="input-group-btn">
@@ -64,10 +64,10 @@
             </el-form>
             <hr>
             <span slot="footer" class="dialog-footer">
-            <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
-            <el-button v-if="create" type="primary" @click="createCategory" icon="circle-check">Save</el-button>
-            <el-button v-if="!create" type="primary" @click="updateCategory" icon="circle-check">Save</el-button>
-        </span>
+                <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
+                <el-button v-if="create" type="primary" @click="createCategory" icon="circle-check">Save</el-button>
+                <el-button v-if="!create" type="primary" @click="updateCategory" icon="circle-check">Save</el-button>
+            </span>
         </el-dialog>
 
         <el-dialog title="Warning!" v-model="confirmationDialogVisible" size="tiny" @close="readCategories()">
@@ -96,7 +96,8 @@
                 confirmationDialogVisible: false,
                 rowToDelete: null,
                 create: true,
-                qry: ''
+                qry: '',
+                loading: false
             }
         },
         mounted() {
@@ -136,11 +137,16 @@
                 this.errors = [];
             },
             readCategories() {
+                this.loading = true;
                 axios.get('/category')
                     .then(response => {
 
                         this.categories = response.data.categories;
+                        this.loading = false;
 
+                    })
+                    .catch(error => {
+                        this.loading = false;
                     });
             },
             initUpdate(row) {
@@ -184,6 +190,7 @@
                     });
             },
             searchCategory() {
+                this.loading = true;
                 axios.post('/category/search', {
                     qry: this.qry
                 })
@@ -191,10 +198,11 @@
 
                         console.log(response);
                         this.categories = response.data.categories;
+                        this.loading = false;
 
                     })
                     .catch(error => {
-
+                        this.loading = false;
                     });
             }
         }

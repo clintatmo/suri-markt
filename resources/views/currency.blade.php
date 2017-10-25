@@ -1,4 +1,4 @@
-@extends('home')
+@extends('admin')
 @section('subcontent')
     <currency></currency>
 @endsection

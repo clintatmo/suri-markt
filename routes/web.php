@@ -18,18 +18,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin', 'AdminController@index')->name('admin');
 Route::get('/admin/categories', function () {
     return view('category');
-})->name('categories');
+})->name('categories')->middleware('auth');
 Route::get('/admin/conditions', function () {
     return view('condition');
-})->name('conditions');
+})->name('conditions')->middleware('auth');
 Route::get('/admin/currencies', function () {
     return view('currency');
-})->name('currencies');
+})->name('currencies')->middleware('auth');
 Route::get('/admin/districts', function () {
     return view('district');
-})->name('districts');
+})->name('districts')->middleware('auth');
 
 Route::post('/category/search', 'CategoryController@search');
 
