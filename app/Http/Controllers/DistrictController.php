@@ -33,7 +33,8 @@ class DistrictController extends Controller
      */
     public function search()
     {
-        $districts = District::where('name', 'LIKE', '%a%')->get();
+        $qry = request('qry');
+        $districts = District::where('name', 'LIKE', "%{$qry}%")->get();
         return response()->json([
             'districts'    => $districts,
             'message' => 'Success'

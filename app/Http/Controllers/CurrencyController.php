@@ -33,7 +33,8 @@ class CurrencyController extends Controller
      */
     public function search()
     {
-        $currencies = Currency::where('name', 'LIKE', '%a%')->get();
+        $qry = request('qry');
+        $currencies = Currency::where('name', 'LIKE', "%{$qry}%")->get();
         return response()->json([
             'currencies'    => $currencies,
             'message' => 'Success'

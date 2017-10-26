@@ -33,7 +33,8 @@ class CategoryController extends Controller
      */
     public function search()
     {
-        $categories = Category::where('name', 'LIKE', '%a%')->get();
+        $qry = request('qry');
+        $categories = Category::where('name', 'LIKE', "%{$qry}%")->get();
         return response()->json([
             'categories'    => $categories,
             'message' => 'Success'

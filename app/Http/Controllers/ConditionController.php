@@ -33,7 +33,8 @@ class ConditionController extends Controller
      */
     public function search()
     {
-        $conditions = Condition::where('name', 'LIKE', '%a%')->get();
+        $qry = request('qry');
+        $conditions = Condition::where('name', 'LIKE', "%{$qry}%")->get();
         return response()->json([
             'conditions'    => $conditions,
             'message' => 'Success'
