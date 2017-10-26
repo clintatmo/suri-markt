@@ -53,10 +53,14 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
+                                    @role('admin')
+                                        <li><a><i class="glyphicon glyphicon-globe"></i> Role: [ ADMIN ]</a></li>
+                                    @endrole
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
+                                            <i class="glyphicon glyphicon-off"></i>
                                             Logout
                                         </a>
 

@@ -19,10 +19,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/admin/categories', function () {
+Route::get('/admin', ['middleware' => ['role:admin'], 'uses' =>'AdminController@index'])->name('admin');
+Route::get('/admin/categories', ['middleware' => ['role:admin'], function () {
     return view('category');
-})->name('categories')->middleware('auth');
+}])->name('categories');
 Route::get('/admin/conditions', function () {
     return view('condition');
 })->name('conditions')->middleware('auth');
