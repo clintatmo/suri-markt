@@ -16,7 +16,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-fixed-top">
+        <nav class="navbar-inverse navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
 
@@ -54,7 +54,7 @@
 
                                 <ul class="dropdown-menu" role="menu">
                                     @role('admin')
-                                        <li><a><i class="glyphicon glyphicon-globe"></i> Role: [ ADMIN ]</a></li>
+                                        <li><a href="{{ route('admin') }}"><i class="glyphicon glyphicon-globe"></i> Role: [ ADMIN ]</a></li>
                                     @endrole
                                     <li>
                                         <a href="{{ route('logout') }}"
