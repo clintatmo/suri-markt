@@ -43,6 +43,6 @@ class HomeController extends Controller
 //        // role attach alias
 //        $user->attachRole($role);
 
-        return view('home');
+        return view('ad');
     }
 }

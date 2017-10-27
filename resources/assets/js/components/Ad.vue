@@ -34,7 +34,7 @@
                             sortable>
                     </el-table-column>
                     <el-table-column
-                            prop="name"
+                            prop="title"
                             label="NAME"
                             width="400"
                             sortable>
@@ -63,10 +63,57 @@
                 </ul>
             </div>
             <el-form ref="ad" label-position="right" :model="ad" label-width="120px">
-                <el-form-item label="Name" prop="name">
-                    <el-input v-model="ad.name"></el-input>
+                <el-form-item label="Title" prop="title">
+                    <el-input v-model="ad.title"></el-input>
+                </el-form-item>
+                <el-form-item label="Description" prop="description">
+                    <el-input  type="textarea" :rows="3" v-model="ad.description"></el-input>
+                </el-form-item>
+                <el-form-item label="Currency" prop="currency">
+                    <el-select placeholder="Select" filterable v-model="ad.currency">
+                        <el-option
+                                v-for="item in currencies"
+                                :label="item.name"
+                                v-bind:value="item.id"
+                                :key="item.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="Price" prop="price">
+                    <el-input-number v-model="ad.price" :min="1"></el-input-number>
+                </el-form-item>
+                <el-form-item label="Category" prop="category">
+                    <el-select placeholder="Select" filterable v-model="ad.category">
+                        <el-option
+                                v-for="item in categories"
+                                :label="item.name"
+                                v-bind:value="item.id"
+                                :key="item.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="Condition" prop="condition">
+                    <el-select placeholder="Select" filterable v-model="ad.condition">
+                        <el-option
+                                v-for="item in conditions"
+                                :label="item.name"
+                                v-bind:value="item.id"
+                                :key="item.id">
+                        </el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="District" prop="district">
+                    <el-select placeholder="Select" filterable v-model="ad.district">
+                        <el-option
+                                v-for="item in districts"
+                                :label="item.name"
+                                v-bind:value="item.id"
+                                :key="item.id">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
+            <span>{{ad}}</span>
             <hr>
             <span slot="footer" class="dialog-footer">
                 <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>
@@ -91,10 +138,21 @@
         data() {
             return {
                 ad: {
-                    name: ''
+                    title: '',
+                    description: '',
+                    currency: '',
+                    price: 0,
+                    condition: '',
+                    category: '',
+                    district: '',
+                    deleted: false
                 },
                 errors: [],
                 ads: [],
+                categories: [],
+                conditions: [],
+                currencies: [],
+                districts: [],
                 update_ad: {},
                 dialogFormVisible: false,
                 dialogFormTitle: 'Add New Ad',
@@ -107,6 +165,10 @@
         },
         mounted() {
             this.readAds();
+            this.readCategories();
+            this.readConditions();
+            this.readCurrencies();
+            this.readDistricts();
         },
         methods: {
             initCreate() {
@@ -116,7 +178,14 @@
             },
             createAd() {
                 axios.post('/ad', {
-                    name: this.ad.name
+                    title: this.ad.title,
+                    description: this.ad.description,
+                    currency: this.ad.currency,
+                    price: this.ad.price,
+                    condition: this.ad.condition,
+                    category: this.ad.category,
+                    district: this.ad.district,
+                    deleted: this.ad.deleted
                 })
                     .then(response => {
 
@@ -128,17 +197,24 @@
                     .catch(error => {
                         this.errors = [];
 
-                        if (error.response.data.errors.name) {
-                            this.errors.push(error.response.data.errors.name[0]);
-                        }
+                        console.log(error);
 
-                        if (error.response.data.errors.description) {
-                            this.errors.push(error.response.data.errors.description[0]);
+                        if (error.response.data.errors) {
+                            this.errors.push(error.response.data.errors);
                         }
                     });
             },
             reset() {
-                this.ad.name = '';
+                this.ad = {
+                    title: '',
+                    description: '',
+                    currency: '',
+                    price: 0,
+                    condition: '',
+                    category: '',
+                    district: '',
+                    deleted: false
+                };
                 this.errors = [];
             },
             readAds() {
@@ -147,6 +223,58 @@
                     .then(response => {
 
                         this.ads = response.data.ads;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                    });
+            },
+            readCategories() {
+                this.loading = true;
+                axios.get('/category')
+                    .then(response => {
+
+                        this.categories = response.data.categories;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                    });
+            },
+            readConditions() {
+                this.loading = true;
+                axios.get('/condition')
+                    .then(response => {
+
+                        this.conditions = response.data.conditions;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                    });
+            },
+            readCurrencies() {
+                this.loading = true;
+                axios.get('/currency')
+                    .then(response => {
+
+                        this.currencies = response.data.currencies;
+                        this.loading = false;
+
+                    })
+                    .catch(error => {
+                        this.loading = false;
+                    });
+            },
+            readDistricts() {
+                this.loading = true;
+                axios.get('/district')
+                    .then(response => {
+
+                        this.districts = response.data.districts;
                         this.loading = false;
 
                     })
@@ -163,7 +291,14 @@
             },
             updateAd() {
                 axios.patch('/ad/' + this.ad.id, {
-                    name: this.ad.name
+                    title: this.ad.title,
+                    description: this.ad.description,
+                    currency: this.ad.currency,
+                    price: this.ad.price,
+                    condition: this.ad.condition,
+                    category: this.ad.category,
+                    district: this.ad.district,
+                    deleted: this.ad.deleted
                 })
                     .then(response => {
 
@@ -173,8 +308,8 @@
                     })
                     .catch(error => {
                         this.errors = [];
-                        if (error.response.data.errors.name) {
-                            this.errors.push(error.response.data.errors.name[0]);
+                        if (error.response.data.errors) {
+                            this.errors.push(error.response.data.errors);
                         }
                     });
             },
