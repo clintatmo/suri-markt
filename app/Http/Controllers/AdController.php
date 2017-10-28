@@ -35,7 +35,7 @@ class AdController extends Controller
     public function search()
     {
         $qry = request('qry');
-        $ads = Ad::where('title', 'LIKE', "%{$qry}%")->get();
+        $ads = Ad::where('title', 'LIKE', "%{$qry}%")->andWhere(['user_id' => Auth::user()->id])->andWhere(['deleted' => false])->get();
         return response()->json([
             'ads'    => $ads,
             'message' => 'Success'

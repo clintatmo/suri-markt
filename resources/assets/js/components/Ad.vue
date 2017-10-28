@@ -48,7 +48,7 @@
                     <el-table-column
                             prop="price"
                             label="Prijs"
-                            width="400"
+                            width="100"
                             sortable>
                     </el-table-column>
                     <el-table-column
@@ -125,7 +125,7 @@
                     </el-select>
                 </el-form-item>
             </el-form>
-            <span>{{ad}}</span>
+            <!--<span>{{ad}}</span>-->
             <hr>
             <span slot="footer" class="dialog-footer">
                 <el-button type="default" @click="dialogFormVisible = false, reset()" icon="circle-cross">Cancel</el-button>

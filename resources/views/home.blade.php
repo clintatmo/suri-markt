@@ -31,8 +31,8 @@
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-home"></i> Mijn webshop </a>
                                 </li>
-                                <li>
-                                    <a href="#"><i class="fa fa-fw fa-folder"></i> Mijn advertenties </a>
+                                <li class="{{ Request::is('ads') ? 'active' : '' }}">
+                                    <a href="{{ route('ads') }}"><i class="fa fa-fw fa-folder"></i> Mijn advertenties </a>
                                 </li>
                                 <li>
                                     <a href="#"><i class="fa fa-fw fa-folder"></i> Mijn account </a>

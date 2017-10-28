@@ -101981,7 +101981,7 @@ var render = function() {
                   attrs: {
                     prop: "price",
                     label: "Prijs",
-                    width: "400",
+                    width: "100",
                     sortable: ""
                   }
                 }),
@@ -102249,8 +102249,6 @@ var render = function() {
             ],
             1
           ),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(_vm.ad))]),
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
