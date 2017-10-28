@@ -35,7 +35,19 @@
                     </el-table-column>
                     <el-table-column
                             prop="title"
-                            label="NAME"
+                            label="Titel"
+                            width="400"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            prop="description"
+                            label="Omschrijving"
+                            width="400"
+                            sortable>
+                    </el-table-column>
+                    <el-table-column
+                            prop="price"
+                            label="Prijs"
                             width="400"
                             sortable>
                     </el-table-column>
@@ -192,15 +204,18 @@
                         this.reset();
                         this.readAds();
                         this.dialogFormVisible = false;
+                        Vue.prototype.$message({message: response.data.message, type: 'success'});
 
                     })
                     .catch(error => {
                         this.errors = [];
 
-                        console.log(error);
+//                        console.log(error.response);
 
                         if (error.response.data.errors) {
                             this.errors.push(error.response.data.errors);
+                        } else {
+                            Vue.prototype.$message({message: error.response.data.message, type: 'error'});
                         }
                     });
             },

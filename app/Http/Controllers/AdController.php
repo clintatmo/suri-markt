@@ -73,12 +73,13 @@ class AdController extends Controller
         $ad = Ad::create([
             'title'        => request('title'),
             'description' => request('description'),
-            'currency_id' => request('currency'),
+            'currency' => request('currency'),
             'price' => request('price'),
-            'condition_id' => request('condition'),
-            'category_id' => request('category'),
-            'district_id' => request('district'),
+            'condition' => request('condition'),
+            'category' => request('category'),
+            'district' => request('district'),
             'user_id'     => Auth::user()->id,
+            'views'     => 0,
             'deleted'     => false
         ]);
 
@@ -131,12 +132,11 @@ class AdController extends Controller
 
         $ad->title = request('title');
         $ad->description = request('description');
-        $ad->currency_id = request('currency_id');
+        $ad->currency = request('currency_id');
         $ad->price = request('price');
-        $ad->condition_id = request('condition_id');
-        $ad->category_id = request('category_id');
-        $ad->district_id = request('district_id');
-        $ad->currency_id = request('currency_id');
+        $ad->condition = request('condition_id');
+        $ad->category = request('category_id');
+        $ad->district = request('district_id');
         $ad->save();
 
         return response()->json([

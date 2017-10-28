@@ -9,12 +9,13 @@ class Ad extends Model
     protected $fillable = [
         'title',
         'description',
-        'currency_id',
+        'currency',
         'price',
-        'condition_id',
-        'category_id',
-        'district_id',
+        'condition',
+        'category',
+        'district',
         'user_id',
+        'views',
         'deleted',
     ];
 }

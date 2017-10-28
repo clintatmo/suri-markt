@@ -101606,6 +101606,18 @@ Object.defineProperty(exports, "__esModule", {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
     data: function data() {
@@ -101667,13 +101679,16 @@ exports.default = {
                 _this.reset();
                 _this.readAds();
                 _this.dialogFormVisible = false;
+                Vue.prototype.$message({ message: response.data.message, type: 'success' });
             }).catch(function (error) {
                 _this.errors = [];
 
-                console.log(error);
+                //                        console.log(error.response);
 
                 if (error.response.data.errors) {
                     _this.errors.push(error.response.data.errors);
+                } else {
+                    Vue.prototype.$message({ message: error.response.data.message, type: 'error' });
                 }
             });
         },
@@ -101947,7 +101962,25 @@ var render = function() {
                 _c("el-table-column", {
                   attrs: {
                     prop: "title",
-                    label: "NAME",
+                    label: "Titel",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "description",
+                    label: "Omschrijving",
+                    width: "400",
+                    sortable: ""
+                  }
+                }),
+                _vm._v(" "),
+                _c("el-table-column", {
+                  attrs: {
+                    prop: "price",
+                    label: "Prijs",
                     width: "400",
                     sortable: ""
                   }
