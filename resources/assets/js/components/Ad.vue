@@ -319,12 +319,15 @@
 
                         this.reset();
                         this.dialogFormVisible = false;
+                        Vue.prototype.$message({message: response.data.message, type: 'success'});
                         this.readAds();
                     })
                     .catch(error => {
                         this.errors = [];
                         if (error.response.data.errors) {
                             this.errors.push(error.response.data.errors);
+                        } else {
+                            Vue.prototype.$message({message: error.response.data.message, type: 'error'});
                         }
                     });
             },
@@ -337,11 +340,17 @@
                     .then(response => {
 
                         this.confirmationDialogVisible = false;
+                        Vue.prototype.$message({message: response.data.message, type: 'success'});
                         this.readAds();
 
                     })
                     .catch(error => {
-
+                        this.errors = [];
+                        if (error.response.data.errors) {
+                            this.errors.push(error.response.data.errors);
+                        } else {
+                            Vue.prototype.$message({message: error.response.data.message, type: 'error'});
+                        }
                     });
             },
             searchAd() {

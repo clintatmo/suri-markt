@@ -101788,11 +101788,14 @@ exports.default = {
 
                 _this7.reset();
                 _this7.dialogFormVisible = false;
+                Vue.prototype.$message({ message: response.data.message, type: 'success' });
                 _this7.readAds();
             }).catch(function (error) {
                 _this7.errors = [];
                 if (error.response.data.errors) {
                     _this7.errors.push(error.response.data.errors);
+                } else {
+                    Vue.prototype.$message({ message: error.response.data.message, type: 'error' });
                 }
             });
         },
@@ -101806,8 +101809,16 @@ exports.default = {
             axios.delete('/ad/' + id).then(function (response) {
 
                 _this8.confirmationDialogVisible = false;
+                Vue.prototype.$message({ message: response.data.message, type: 'success' });
                 _this8.readAds();
-            }).catch(function (error) {});
+            }).catch(function (error) {
+                _this8.errors = [];
+                if (error.response.data.errors) {
+                    _this8.errors.push(error.response.data.errors);
+                } else {
+                    Vue.prototype.$message({ message: error.response.data.message, type: 'error' });
+                }
+            });
         },
         searchAd: function searchAd() {
             var _this9 = this;

@@ -21,7 +21,7 @@ class AdController extends Controller
      */
     public function index()
     {
-        $ads = Ad::where(['user_id' => Auth::user()->id])->get();
+        $ads = Ad::where(['user_id' => Auth::user()->id])->where(['deleted' => false])->get();
         return response()->json([
             'ads'    => $ads,
         ], 200);
@@ -35,7 +35,7 @@ class AdController extends Controller
     public function search()
     {
         $qry = request('qry');
-        $ads = Ad::where('title', 'LIKE', "%{$qry}%")->andWhere(['user_id' => Auth::user()->id])->andWhere(['deleted' => false])->get();
+        $ads = Ad::where('title', 'LIKE', "%{$qry}%")->where(['user_id' => Auth::user()->id])->where(['deleted' => false])->get();
         return response()->json([
             'ads'    => $ads,
             'message' => 'Success'
@@ -152,6 +152,11 @@ class AdController extends Controller
      */
     public function destroy(Ad $ad)
     {
-        //
+        $ad->deleted = true;
+        $ad->save();
+
+        return response()->json([
+            'message' => 'Ad deleted successfully!'
+        ], 200);
     }
 }
