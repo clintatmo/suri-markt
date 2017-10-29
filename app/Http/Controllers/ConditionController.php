@@ -20,7 +20,7 @@ class ConditionController extends Controller
      */
     public function index()
     {
-        $conditions = Condition::all();
+        $conditions = Condition::orderBy('name')->get();
         return response()->json([
             'conditions'    => $conditions,
         ], 200);

@@ -20,7 +20,7 @@ class CurrencyController extends Controller
      */
     public function index()
     {
-        $currencies = Currency::all();
+        $currencies = Currency::orderBy('name')->get();
         return response()->json([
             'currencies'    => $currencies,
         ], 200);
